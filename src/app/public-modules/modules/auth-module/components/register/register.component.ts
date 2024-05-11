@@ -181,7 +181,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
             // });
             await FB.api('/me',{ fields: 'picture{url}' }, function (profile: any) {
               console.log(profile)
-              that.registerForm.value.profilepictureurl = profile.data?.url;
+              that.registerForm.value.profilepictureurl = profile.picture?.data?.url;
               that.socialSignup()
             });
           });

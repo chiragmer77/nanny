@@ -138,10 +138,10 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
           console.log("email", email)
           that.loginForm.value.LoginType = 'Facebook';
           that.loginForm.value.email = email;
-          that.loginForm.value.profilepictureurl = email;
+//          that.loginForm.value.profilepictureurl = email;
           await FB.api('/me',{ fields: 'picture{url}' }, function (profile: any) {
             console.log(profile)
-            that.loginForm.value.profilepictureurl = profile.data?.url;
+            that.loginForm.value.profilepictureurl = profile.picture?.data?.url;
             that.socialSignin()
           });
         });
