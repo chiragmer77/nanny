@@ -166,7 +166,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
         .subscribe(async (res) => {
           // var userId = res.userID;
           console.log("res", res);
-          // this.registerForm.value.token = res;
+          this.registerForm.value.token = res.accessToken;
           await FB.api('/me', { fields: 'email' }, async function (response: any) {
             console.log(response)
             email = response.email;
