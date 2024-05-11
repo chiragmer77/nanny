@@ -171,7 +171,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
             email = response.email;
             that.registerForm.value.logintype = 'Facebook';
             that.registerForm.value.email = email;
-            that.registerForm.value.password = '';
+            that.registerForm.value.password = '12345678';
             // var profileUrl = `${userId+'/picture?type=large'}`
             // console.log(profileUrl)
             // await FB.api(profileUrl, function (profile: any) {
@@ -204,6 +204,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
 
   socialSignup() {
     let params = { ...this.registerForm.value }
+    console.log("params>>>>>>>>>>>>.",params)
     params = removeFieldsFromObj(params, ['confirmPassword', 'password']);
     params.option2 = params.ipAddress
     params.option3 = params.country
