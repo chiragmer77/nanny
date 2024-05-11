@@ -171,6 +171,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
             email = response.email;
             that.registerForm.value.logintype = 'Facebook';
             that.registerForm.value.email = email;
+            that.registerForm.value.password = '';
             // var profileUrl = `${userId+'/picture?type=large'}`
             // console.log(profileUrl)
             // await FB.api(profileUrl, function (profile: any) {
