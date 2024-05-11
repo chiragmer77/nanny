@@ -1,0 +1,19 @@
+<div class="search">
+  <div class="container">
+    <h3 *ngIf="isAupair">{{ "FAMILY_SEARCH_PAGE.TITLE" | translate }}</h3>
+
+    <h3 *ngIf="isFamily">{{ "AUPAIR_SEARCH_PAGE.TITLE" | translate }}</h3>
+
+    <p *ngIf="isAupair">{{ "FAMILY_SEARCH_PAGE.SUB_TITLE" | translate }}</p>
+
+    <p *ngIf="isFamily">{{ "AUPAIR_SEARCH_PAGE.SUB_TITLE" | translate }}</p>
+
+    <div *ngIf="isAupair">
+      <app-family-search-filter></app-family-search-filter>
+    </div>
+
+    <div *ngIf="isFamily">
+      <app-aupair-search-filter></app-aupair-search-filter>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.home {
+  box-shadow: 1px 1px 9px 0px rgba(0, 0, 0, 0.1);
+  height: 8rem;
+  line-height: 8rem;
+}
+
+.filter-language {
+  display: inline-block;
+  width: 8rem;
+  margin-right: 1.2rem;
+}
+.chat-badge {
+  background: #ff4b91;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  position: absolute;
+  right: 28.6rem;
+  bottom: 4.5rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mat-mdc-menu-item.mdc-list-item {
+  min-height: 36px;
+
+}
+// .hamburger-menu {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 6px;
+// }
+
+// .hamburger-menu::before,
+// .hamburger-menu::after,
+// .hamburger-menu input {
+//   content: "";
+//   width: 60px;
+//   height: 8px;
+//   background-color: #000000;
+//   border-radius: 9999px;
+// }

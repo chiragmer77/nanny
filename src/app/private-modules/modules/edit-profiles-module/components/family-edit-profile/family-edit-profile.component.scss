@@ -1,0 +1,38 @@
+.invalid{
+    color:orange !important;
+  font-size: 12px !important;
+  }
+  
+h5,h4 {
+    font-weight: 550;
+    color: #ff4b91;
+    
+}
+@media(max-width:767px) {
+
+    .col-md-4,
+    .col-md-6 {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .form-control {
+        &--textarea {
+            margin-bottom: 3rem;
+        }
+    }
+
+    // .MT-4 {
+    //     margin-top: 0rem !important;
+    // }
+
+    .mobile-field-inner {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .row {
+        flex-wrap: nowrap;
+    }
+}

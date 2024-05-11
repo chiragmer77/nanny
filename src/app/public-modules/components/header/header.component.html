@@ -1,0 +1,153 @@
+<div class="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 col-md-3 col-xs-2 PL-0">
+        <!-- <label class="hamburger-menu">
+          <input type="checkbox" />
+        </label>
+        <aside>
+          <nav>
+            <div>this</div>
+            <div>is</div>
+            <div>sidebar</div>
+            <div>here</div>
+          </nav>
+        </aside> -->
+
+        <a (click)="onHome()" class="home__logo">
+          <img src="../../../../assets/images/logo-2.png" />
+          <h4>{{ "HEADER.NANNY_AUPAIR" | translate }}</h4>
+        </a>
+      </div>
+
+
+      <div class="col-sm-4 col-md-6 col-xs-4 PLR-0 text-center" [ngClass]="{'xs-display-none' : !isLoggedIn && !isMediaQueryMobile}">
+        <div *ngIf="!isLoggedIn && isMediaQueryMobile" class="home__menu">
+          <ul>
+            <li>
+              <a [routerLink]="familyUrl" routerLinkActive="active">{{
+                "HEADER.FAMILY_LINK" | translate
+              }}</a>
+            </li>
+
+            <li>
+              <a [routerLink]="aupairCountryUrl" routerLinkActive="active">{{
+                "HEADER.AUPAIR_LINK" | translate
+              }}</a>
+            </li>
+            <li>
+              <a [routerLink]="avoidScamsUrl" routerLinkActive="active">{{
+                "HEADER.AVOID_SCAMS" | translate
+              }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div *ngIf="isLoggedIn" class="home__menu">
+          <ul>
+            <li>
+              <a [routerLink]="searchUrl" routerLinkActive="active">{{
+                "HEADER.SEARCH_LINK" | translate
+              }}</a>
+            </li>
+
+            <li>
+              <a (click)="chatClick()" [routerLink]="chatUrl" routerLinkActive="active">{{
+                "HEADER.CHAT_LINK" | translate
+              }}</a>
+              <small class="chat-badge" *ngIf="userDetail.unreadCount !==null && userDetail.unreadCount>0">{{userDetail.unreadCount}}</small>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-sm-5 col-md-3 col-xs-6 text-right PR-0" [ngClass]="{'col-xs-10' : !isLoggedIn && !isMediaQueryMobile}">
+        <div class="filter-language">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-select
+                [formControl]="languageFormCtrl"
+                (selectionChange)="onChangeLanguage($event)"
+              >
+                <mat-option
+                  *ngFor="let lang of languageList"
+                  [value]="lang.value"
+                >
+                  {{ lang.title }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div *ngIf="!isLoggedIn" class="display-inline">
+          <button
+            (click)="onLogin()"
+            class="primary-btn MR-1"
+            mat-stroked-button
+          >
+            {{ "HEADER.LOGIN_BTN" | translate }}
+          </button>
+
+          <button
+            (click)="onRegister()"
+            class="secondary-btn"
+            mat-flat-button
+            color="primary"
+          >
+            {{ "HEADER.REGISTER_BTN" | translate }}
+          </button>
+        </div>
+
+        <div *ngIf="isLoggedIn" class="display-inline">
+          <a class="profile">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              *ngIf="userDetail"
+            >
+              <!-- userDetail.photo ||  -->
+              <img
+                [src]="
+                  userDetail.photo ||
+                  'assets/images/profile-picture-default.png'
+                "
+              />
+
+              <span class="material-icons-outlined material-icon-font-outlined">
+                arrow_drop_down
+              </span>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              <button (click)="onViewProfile()" mat-menu-item>
+                <span
+                  class="material-icons-outlined material-icon-font-outlined"
+                >
+                  person
+                </span>
+                <span>{{ "HEADER.VIEW_PROFILE" | translate }}</span>
+              </button>
+              <button (click)="onHomePage()" mat-menu-item>
+                <span
+                  class="material-icons-outlined material-icon-font-outlined"
+                >
+                  home
+                </span>
+                <span>{{ "HEADER.VIEW_HOME" | translate }}</span>
+              </button>
+              <button (click)="onLogout()" class="red-color" mat-menu-item>
+                <span
+                  class="material-icons-outlined material-icon-font-outlined"
+                >
+                  logout
+                </span>
+                <span>{{ "HEADER.LOGOUT" | translate }}</span>
+              </button>
+            </mat-menu>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

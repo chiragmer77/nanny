@@ -1,0 +1,96 @@
+<a (click)="onClickUserItem(user)" class="host-families-box">
+  <div class="center-img-box">
+    <img
+      class="host-families-box__family-img"
+      [src]="selectedPicture?.src || 'assets/images/aupair-default.png'"
+    />
+  </div>
+
+  <div class="multiple-img">
+    <ul>
+      <li *ngFor="let photo of userPhotos; let idx = index">
+        <a
+          [ngClass]="{ active: idx === selectedPicture?.id }"
+          (click)="onClickImage($event, photo)"
+        >
+          <svg
+            *ngIf="selectedPicture?.id === idx"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="5" cy="5" r="5" fill="white" />
+          </svg>
+
+          <svg
+            *ngIf="selectedPicture?.id !== idx"
+            width="6"
+            height="6"
+            viewBox="0 0 6 6"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="3" cy="3" r="2.75" stroke="white" stroke-width="0.5" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="host-families-box__family">
+    <div class="host-families-box__data">
+      <h5>{{ user.firstName }} - {{ getCountryName(user.country) }}</h5>
+      <span class="material-icons-outlined material-icon-font-outlined">
+        location_on
+      </span>
+      <small> {{ user.city }}</small>
+    </div>
+
+    <div class="host-families-box__chat">
+      <button type="button" (click)="onSendInvite($event, user)" class="chat-bg MR-1-half">
+        <span class="material-icons-outlined material-icon-font-outlined">
+          chat_bubble_outline
+        </span>
+      </button>
+
+      <a
+        *ngIf="userDetail?.userType === userTypeEnum.AU_PAIR"
+        (click)="onClickFavoriteFamily($event, user)"
+        class="chat-bg"
+      >
+        <span class="material-icons-outlined material-icon-font-outlined">
+          {{ user.favorite ? "favorite" : "favorite_outline" }}
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="host-families-box__border"></div>
+
+  <div class="host-families-box__date-time">
+    <div class="row">
+      <div class="col-md-4 PL-0 PR-0">
+        <span class="material-icons-outlined material-icon-font-outlined">
+          calendar_today
+        </span>
+        <b>{{ user.lookingFrom | date : "MMM/YY" }}</b>
+      </div>
+
+      <div class="col-md-4 PL-0 PR-0">
+        <span class="material-icons-outlined material-icon-font-outlined">
+          sentiment_satisfied
+        </span>
+        <b>{{ user.noOfChildren }} {{ "COMMON.CHILDREN" | translate }}</b>
+      </div>
+
+      <div class="col-md-4 PR-0">
+        <span class="material-icons-outlined material-icon-font-outlined">
+          schedule
+        </span>
+        <b>{{ getDuration(user.durationOfStay) }}</b>
+      </div>
+    </div>
+  </div>
+</a>

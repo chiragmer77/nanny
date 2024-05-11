@@ -1,0 +1,214 @@
+<div class="home">
+  <div class="container">
+    <div class="home__connect-aupair">
+      <div class="row">
+        <div class="col-md-6 PL-0 MT-1">
+          <!-- <h1>Find Aupair as you please</h1> -->
+          <h1
+            data-aos="fade-right"
+            data-aos-offset="100"
+            data-aos-delay="0"
+            data-aos-easing="ease-in-quart"
+            data-aos-duration="300"
+          >
+            {{ "HOME_PAGE.TITLE_ONE" | translate }}
+            <span>{{ "HOME_PAGE.TITLE_TWO" | translate }}</span>
+            {{ "HOME_PAGE.TITLE_THREE" | translate }}
+            <span>{{ "HOME_PAGE.TITLE_FOUR" | translate }}</span>
+          </h1>
+          <p
+            data-aos="fade-right"
+            data-aos-offset="200"
+            data-aos-delay="600"
+            data-aos-easing="ease-in-quart"
+            data-aos-duration="300"
+          >
+            {{ "HOME_PAGE.SUB_TITLE" | translate }}
+          </p>
+          <button
+            class="secondary-btn"
+            mat-flat-button
+            color="primary"
+            data-aos="fade-right"
+            data-aos-offset="200"
+            data-aos-delay="600"
+            data-aos-easing="ease-in-quart"
+            data-aos-duration="300"
+          >
+            {{ "HOME_PAGE.CHAT_BTN" | translate }}
+          </button>  &nbsp; &nbsp;
+
+
+        <div class="title-spacing ">
+          <table class="mat-elevation-z8">
+            <thead>
+                 <tr [@fadeInAnimation]>
+                     <th></th>
+                     <th>Other Au pair Websites</th>
+                     <th>NannyAupair.com</th>
+                   
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr [@bounce]>
+                     <th>Registration</th>
+                     <td class="green-background">Free</td>
+                     <td class="green-background">Free</td>
+
+                 </tr>
+                 <tr [@bounce]>
+                     <th>Share contact</th>
+                     <td class="red-text">Paid</td>
+                     <td class="green-background">Free</td>
+
+                 </tr>
+                 <tr [@bounce]>
+                     <th>Chat</th>
+                     <td class="red-text">Paid</td>
+                     <td class="green-background">Free</td>
+
+                 </tr>
+                 <tr  [@bounce]>
+                     <th>Video Chat</th>
+                     <td class="red-text">Impossible</td>
+                     <td class="green-background">Free</td>
+
+                 </tr>
+                
+                </tbody>
+              </table>
+          
+            </div>
+
+        </div>
+
+        <div
+          class="col-md-6 text-center PR-0"
+          data-aos="fade-left"
+          data-aos-offset="200"
+          data-aos-delay="600"
+          data-aos-easing="ease-in-quart"
+          data-aos-duration="300"
+        >
+          <img src="../../../../assets/images/Au Pairs GIF.gif" />
+        </div>
+      </div>
+    </div>
+
+    <div class="title-spacing text-center">
+      <h1>
+        {{ "HOME_PAGE.FAMILY_TITLE" | translate }}
+      </h1>
+      
+    </div>
+
+    <!-- <app-aupair-family-box></app-aupair-family-box> -->
+
+    <div class="row">
+      <div class="col-md-3 PL-0 MB-2" *ngFor="let family of familyList">
+        <app-family-user-box
+          (itemClick)="onClickFamilyUser($event)"
+          [user]="family"
+        ></app-family-user-box>
+      </div>
+    </div>
+
+    <div class="title-spacing text-center">
+      <h1>
+        {{ "HOME_PAGE.AUPAIR_TITLE_ONE" | translate }}
+      </h1>
+    
+    </div>
+
+    <!-- <app-aupair-family-box></app-aupair-family-box> -->
+    <div class="row">
+      <div class="col-md-3 PL-0 MB-2" *ngFor="let aupair of nonEuAupairList">
+        <app-aupair-user-box
+          [user]="aupair"
+          (itemClick)="onClickAupairUser($event, nonEuAupairList)"
+        ></app-aupair-user-box>
+      </div>
+    </div>
+
+    <div class="title-spacing text-center">
+      <h1>
+        {{ "HOME_PAGE.AUPAIR_TITLE_TWO" | translate }}
+      </h1>
+     
+    </div>
+
+    <!-- <app-aupair-family-box></app-aupair-family-box> -->
+    <div class="row">
+      <div class="col-md-3 PL-0 MB-2" *ngFor="let aupair of euAupairList">
+        <app-aupair-user-box
+          [user]="aupair"
+          (itemClick)="onClickAupairUser($event, euAupairList)"
+        ></app-aupair-user-box>
+      </div>
+    </div>
+
+    <div class="title-spacing text-center">
+      <h1>
+        {{ "HOME_PAGE.ARTICLE_TITLE" | translate }}
+      </h1>
+      <p>
+        {{ "HOME_PAGE.ARTICLE_SUBTITLE" | translate }}
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 PL-0">
+        <a (click)="onArticleDetailsInterview()" class="home__article-box">
+          <img src="assets/images/interview1.png" />
+          <h4>How to conduct an interview with Au pair</h4>
+          <p>
+            Hiring an au pair is a significant decision for families seeking
+            reliable childcare and cultural enrichment for their children.
+            Conducting a proper interview is an important step in this process.
+            Many of the future issues can be avoided if host family can
+            understand the Au pair and vice versa.
+            <a>read more...</a>
+          </p>
+        </a>
+      </div>
+
+      <div class="col-md-4 PL-0">
+        <a (click)="onArticleDetailsAvoidScam()" class="home__article-box">
+          <img src="assets/images/avoid-scam.jpeg" />
+          <h4>How Au pair can avoids scams</h4>
+          <p>
+            For most countries Au pairs do not have to pay money. But in some
+            countries Au pairs has to pay. So first you need to research on if
+            you have to pay anything for that particular country. In Netherlands
+            an agency can collect a maximum of 34 Euros from an Au pair. In some
+            countries Au pair need to pay for flight ticket.
+            <a>read more...</a>
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <div class="title-spacing text-center">
+      <h1>
+        {{ "HOME_PAGE.AUPAIR_TITLE_THREE" | translate }}
+      </h1>
+      <p>
+        {{ "HOME_PAGE.AUPAIR_SUBTITLE_THREE" | translate }}
+      </p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 PL-0">
+        <a  (click)="redirectPage('aupair')">
+          <img class="width-100" src="assets/images/be_aupair.png" />
+        </a>
+      </div>
+
+      <div class="col-md-6 PR-0">
+        <a (click)="redirectPage('family')">
+          <img class="width-100" src="assets/images/be_family.png" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

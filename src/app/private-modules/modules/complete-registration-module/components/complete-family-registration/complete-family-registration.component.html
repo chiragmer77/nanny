@@ -1,0 +1,423 @@
+<div class="auth">
+  <div class="container">
+    <div class="auth__body MT-4-half">
+      <form [formGroup]="familyRegistrationForm" (submit)="onFamilyRegistrationProfileSubmit(familyRegistrationForm)">
+        <h4 *ngIf="!isProfileUpdated">
+          {{ "FAMILY_COMPLETE_REGISTRATION.TITLE" | translate }}
+        </h4>
+        <h4 *ngIf="isProfileUpdated">
+          {{ "FAMILY_COMPLETE_REGISTRATION.UPLOAD" | translate }}
+        </h4>
+        <p *ngIf="!isProfileUpdated">
+          {{ "FAMILY_COMPLETE_REGISTRATION.SUB_TITLE" | translate }}
+        </p>
+
+        <ng-container *ngIf="!isProfileUpdated">
+          <h5 class="MB-1-half">
+            {{ "FAMILY_COMPLETE_REGISTRATION.GENERAL_INFORMATION" | translate }}
+          </h5>
+
+          <div>
+            <div class="row">
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.FIRST_NAME" | translate
+                      }}</mat-label>
+                    <input [placeholder]="
+                        'FAMILY_COMPLETE_REGISTRATION.ENTER_FIRST_NAME'
+                          | translate
+                      " matInput formControlName="firstName" autocomplete="off" maxlength="10" />
+                    <mat-error class="invalid"
+                      *ngIf="(isSubmitted ||(f?.['firstName']?.dirty || f?.['firstName']?.touched)) && f?.['firstName']?.errors && f?.['firstName']?.errors?.['required']">
+                      {{ "AUPAIR_REGISTRATION.VAL_FIRSTNAME" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.LAST_NAME" | translate
+                      }}</mat-label>
+                    <input [placeholder]="
+                        'FAMILY_COMPLETE_REGISTRATION.ENTER_LAST_NAME' | translate
+                      " matInput formControlName="lastName" autocomplete="off" maxlength="10" />
+                    <mat-error class="invalid"
+                      *ngIf="(isSubmitted ||(f?.['lastName']?.dirty || f?.['lastName']?.touched)) && f?.['lastName']?.errors && f?.['lastName']?.errors?.['required']">
+                      {{ "AUPAIR_REGISTRATION.VAL_LASTNAME" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.RESIDING_CITY" | translate
+                      }}</mat-label>
+                    <input [placeholder]="
+                        'FAMILY_COMPLETE_REGISTRATION.ENTER_CITY' | translate
+                      " matInput formControlName="city" autocomplete="off" maxlength="15" />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.RESIDING_COUNTRY"
+                      | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="country">
+                      <mat-optgroup *ngFor="let countryGroup of familyCountry" [label]="countryGroup.title">
+                        <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                          {{ item.text }}
+                        </mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                    <mat-error class="invalid"
+                      *ngIf="(isSubmitted ||(f?.['country']?.dirty || f?.['country']?.touched)) && f?.['country']?.errors && f?.['country']?.errors?.['required']">
+                      {{ "AUPAIR_REGISTRATION.VAL_PRESENTCOUNTRY" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.CITIZEN" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="citizenOf">
+                      <mat-optgroup *ngFor="let countryGroup of familyCountry" [label]="countryGroup.title">
+                        <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                          {{ item.text }}
+                        </mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.No._CHILDREN" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="noOfChildren">
+                      <mat-option *ngFor="let child of numberOfChildren" [value]="child">
+                        {{ child }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.AGE_CHILDREN" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" multiple="" formControlName="listKidsAgeGroup">
+                      <mat-option *ngFor="let age of hostAgeList" [value]="age.value">
+                        {{ age.text }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.FAMILY_TYPE" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="familyType">
+                      <mat-option *ngFor="let familyType of familyTypes" [value]="familyType.value">
+                        {{ familyType.text }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{"FAMILY_EDIT_PROFILE.AUPAIR_MONEY" | translate}}</mat-label>
+                    <input [placeholder]="'FAMILY_EDIT_PROFILE.AUPAIR_MONEY' | translate" matInput
+                      formControlName="pocketMoney" autocomplete="off" maxlength="3" min="0" type="number" />
+                    <mat-select placeholder="Currency" panelClass="mat-select-fixed-width" formControlName="pocketMoneyCurrency">
+                      <mat-option *ngFor="let curr of currency" [value]="curr.value">
+                        {{ curr.text }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_EDIT_PROFILE.SEARCH_STATUS" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="status">
+                      <mat-option *ngFor="let status of statusList" [value]="status.value">
+                        {{ status.text }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="invalid"
+                      *ngIf="(isSubmitted ||(f?.['status']?.dirty || f?.['status']?.touched)) && f?.['status']?.errors && f?.['status']?.errors?.['required']">
+                      {{ "AUPAIR_EDIT.VAL_STATUS" | translate }}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_EDIT_PROFILE.MATCH_EMAIL" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="familyEmail">
+                      <mat-option *ngFor="let familyEmail of familyEmails" [value]="familyEmail.value">
+                        {{ familyEmail.text }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.FACEBOOK_URL" | translate
+                      }}</mat-label>
+                    <input [placeholder]="
+                        'FAMILY_COMPLETE_REGISTRATION.ENTER_FACEBOOK_URL'
+                          | translate
+                      " matInput formControlName="facebookURL" autocomplete="off" />
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+
+            <h5 class="MT-2 MB-1-half">
+              {{
+              "FAMILY_COMPLETE_REGISTRATION.AUPAIR_REQUIREMENTS" | translate
+              }}
+            </h5>
+
+            <div class="row">
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.PRESENT_COUNTRY" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" multiple formControlName="listAupairCountry">
+                      <mat-optgroup *ngFor="let countryGroup of continentAndCountries" [label]="countryGroup.title">
+                        <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                          {{ item.text }}
+                        </mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.AUPAIR_CITIZEN" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" multiple formControlName="listCitizenOf">
+                      <mat-optgroup *ngFor="let countryGroup of aupaircountries" [label]="countryGroup.title">
+                        <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                          {{ item.text }}
+                        </mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.LOOKING_FROM" | translate
+                      }}</mat-label>
+                    <input [placeholder]="
+                        'FAMILY_COMPLETE_REGISTRATION.LOOKING_FROM' | translate
+                      " formControlName="lookingFrom" matInput [min]="minDate" [matDatepicker]="lookingFromPicker" />
+                    <mat-datepicker-toggle matIconSuffix [for]="lookingFromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #lookingFromPicker startView="multi-year" (monthSelected)="
+                        setMonthAndYear($event, lookingFromPicker)
+                      " panelClass="example-month-picker">
+                    </mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-xs-6">
+                <div class="form-control">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{
+                      "FAMILY_COMPLETE_REGISTRATION.DURATION" | translate
+                      }}</mat-label>
+                    <mat-select placeholder="Select" formControlName="durationOfStay">
+                      <mat-option *ngFor="let duration of durationOfStayList" [value]="duration.value">
+                        {{ duration.text }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 col-xs-6">
+                <div class="row">
+                  <div class="col-md-6 PLR-0">
+                    <div class="form-control">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "FAMILY_COMPLETE_REGISTRATION.AGE_FROM" | translate
+                          }}</mat-label>
+                        <mat-select placeholder="Select" formControlName="aupairAgeFrom">
+                          <mat-option *ngFor="let age of fromAgeList" [value]="age">
+                            {{ age }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 PR-0">
+                    <div class="form-control">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "FAMILY_COMPLETE_REGISTRATION.AGE_TO" | translate
+                          }}</mat-label>
+                        <mat-select placeholder="Select" formControlName="aupairAgeTo">
+                          <mat-option *ngFor="let age of toAgeList" [value]="age">
+                            {{ age }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <h5 class="MT-2 MB-2-half">
+              {{ "FAMILY_COMPLETE_REGISTRATION.CONDITIONS" | translate }}
+            </h5>
+
+            <div class="row">
+              <div class="col-md-3 PL-0">
+                <mat-checkbox formControlName="canBike">{{
+                  "FAMILY_COMPLETE_REGISTRATION.CONDITION_ONE" | translate
+                  }}</mat-checkbox>
+              </div>
+
+              <div class="col-md-3 PLR-0">
+                <mat-checkbox formControlName="drivingLicence">{{
+                  "FAMILY_COMPLETE_REGISTRATION.CONDITION_TWO" | translate
+                  }}</mat-checkbox>
+              </div>
+
+              <div class="col-md-6 PR-0">
+                <mat-checkbox formControlName="nonSmoker">{{
+                  "FAMILY_COMPLETE_REGISTRATION.CONDITION_THREE" | translate
+                  }}</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 PL-0">
+                <mat-checkbox formControlName="childCareExperience">{{
+                  "FAMILY_COMPLETE_REGISTRATION.CONDITION_FOUR" | translate
+                  }}</mat-checkbox>
+              </div>
+
+              <div class="col-md-3 PLR-0">
+                <mat-checkbox formControlName="aupairExperience">{{
+                  "FAMILY_COMPLETE_REGISTRATION.CONDITION_FIVE" | translate
+                  }}</mat-checkbox>
+              </div>
+
+              <div class="col-md-6 PR-0">
+                <mat-checkbox formControlName="specialNeedPeople">{{
+                  "FAMILY_COMPLETE_REGISTRATION.CONDITION_SIX" | translate
+                  }}</mat-checkbox>
+              </div>
+            </div>
+
+            <h5 class="MT-2 MB-2-half">
+              {{ "FAMILY_COMPLETE_REGISTRATION.TERMS" | translate }}
+            </h5>
+
+            <div class="row">
+              <div class="col-md-4 PL-0">
+                <mat-checkbox formControlName="agreeToTerms">I agree to the Terms & Conditions & Privacy policy of this
+                  website</mat-checkbox>
+                <mat-error class="invalid"
+                  *ngIf="(isSubmitted ||(f?.['agreeToTerms']?.dirty || f?.['agreeToTerms']?.touched)) && f?.['agreeToTerms']?.errors && f?.['agreeToTerms']?.errors?.['required']">
+                  {{ "FAMILY_COMPLETE_REGISTRATION.AGREE_TO_TERMS" | translate }}</mat-error>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 PL-0">
+                <mat-checkbox formControlName="agreeToEmail" value="true" checked="true">I agree to receive Weekly email
+                  with suitable matches</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="MT-4">
+              <button class="secondary-btn" mat-flat-button color="primary">
+                <span class="material-icons-outlined material-icon-font-outlined">
+                  save
+                </span>
+                {{ "FAMILY_COMPLETE_REGISTRATION.SAVE_BTN" | translate }}
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isProfileUpdated">
+          <app-upload-images></app-upload-images>
+          <div>
+            <button class="skip_button" (click)="navigateToHome()">Add Photos Later</button>
+          </div>
+        </ng-container>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<app-aupair-view-profile
+  *ngIf="userDetail?.userType === userTypeFlag.AU_PAIR"
+  [aupairDetailFromParent]="userDetail"
+/>
+
+<app-family-view-profile
+  *ngIf="userDetail?.userType === userTypeFlag.FAMILY"
+  [familyDetailFromParent]="userDetail"
+/>

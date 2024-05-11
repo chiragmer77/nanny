@@ -1,0 +1,195 @@
+<div class="chat-detail">
+  <div class="chat-detail__header">
+    <div class="chat-detail__header-left">
+      <div>
+
+<mat-icon (click)="onClickBackArrow()" class="d-none visible-xs">keyboard_backspace</mat-icon>
+
+        <img
+          *ngIf="
+            selectedUserDetails && selectedUserDetails?.profilePhoto;
+            else defaultAvatarMain
+          "
+          [src]="selectedUserDetails?.profilePhoto"
+        />
+
+        <ng-template #defaultAvatarMain>
+          <img
+            src="assets/images/profile-picture-default.png"
+            alt="Default Avatar Main"
+          />
+        </ng-template>
+      </div>
+
+      <div>
+        <h4>{{ selectedUserDetails?.firstName }}</h4>
+      </div>
+    </div>
+    <div class="chat-detail__header-right">
+      <button
+      (click)="onAudioClick()"
+      mat-icon-button
+      aria-label="Example icon-button with a camera"
+    >
+      <mat-icon>call</mat-icon>
+    </button>
+      <button
+        (click)="onVideoClick()"
+        mat-icon-button
+        aria-label="Example icon-button with a camera"
+      >
+        <mat-icon>videocam</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="gray-border">
+          <mat-icon
+            ><img src="../../../../../../assets/images/like-icon.png" alt=""
+          /></mat-icon>
+          <span class="menu-text">{{
+            "CHAT_PAGE.ADD_FAVORITE" | translate
+          }}</span>
+        </button>
+        <button mat-menu-item class="gray-border" (click)="blockOrUnBlock()">
+          <mat-icon *ngIf="!isBlockedOn"
+            ><img
+              src="../../../../../../assets/images/thumb_down_icon.png"
+              alt=""
+          /></mat-icon>
+          <mat-icon *ngIf="isBlockedOn"
+            ><img
+              src="../../../../../../assets/images/thumbs_up_icon.png"
+              alt=""
+          /></mat-icon>
+          <span class="menu-text" *ngIf="!isBlockedOn">{{
+            "CHAT_PAGE.NOT_INTERESTED" | translate
+          }}</span>
+          <span class="menu-text" *ngIf="isBlockedOn">{{
+            "CHAT_PAGE.INTERESTED" | translate
+          }}</span>
+        </button>
+        <button mat-menu-item (click)="deleteConversation()">
+          <mat-icon
+            ><img src="../../../../../../assets/images/delete_icon.png" alt=""
+          /></mat-icon>
+          <span class="menu-text menu-text-red">{{
+            "CHAT_PAGE.DELETE_CONVERSATION" | translate
+          }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="chat-detail__main" #scrollBottom>
+    <ng-container *ngFor="let group of groupedMessages">
+      <div class="chat-detail__date-header">
+        <small class="ml-auto test">{{ group.date }}</small>
+      </div>
+      <div *ngFor="let message of group.messages">
+        <div
+          [ngClass]="
+            message.sentById === userDetail.userId
+              ? 'chat-detail__body-right-container'
+              : ''
+          "
+        >
+          <div
+            [ngClass]="
+              message.sentById === userDetail.userId
+                ? 'chat-detail__body-right'
+                : 'chat-detail__body'
+            "
+          >
+            <div *ngIf="message?.messageType !== 2">
+              <img
+                *ngIf="message?.profilePhoto; else defaultAvatarChild"
+                [src]="message?.profilePhoto"
+              />
+              <ng-template #defaultAvatarChild>
+                <img
+                  src="assets/images/profile-picture-default.png"
+                  alt="Default Avatar Child"
+                />
+              </ng-template>
+            </div>
+            <div *ngIf="message?.messageType === 2">
+              <mat-icon
+                class="round-icon"
+                [ngClass]="getIconClass(message, userDetail.userId)"
+              >
+                {{ getIconName(message, userDetail.userId) }}
+              </mat-icon>
+            </div>
+
+            <div class="chat-detail__box" *ngIf="message?.messageType === 2">
+              <h6>{{ message?.sentByName }}</h6>
+              <small class="ml-auto">{{
+                renderDate(message?.dateAdded)
+              }}</small>
+              <h6
+                class="text-light"
+                *ngIf="['NoAnswer', 'Busy'].includes(message?.message?.type)"
+              >
+                {{ getMessageStatus(message) }}
+              </h6>
+              <h6
+                class="text-light"
+                *ngIf="message?.message?.type === 'Connected'"
+              >
+              {{ (message?.message?.callType === 1 ? "Audio Call" : "Video Call") }} - {{ message?.message?.duration | durationFormat }}
+              </h6>
+            </div>
+            <div class="chat-detail__box" *ngIf="message?.messageType !== 2">
+              <h6>{{ message?.sentByName }}</h6>
+              <small class="ml-auto">{{
+                renderDate(message?.dateAdded)
+              }}</small>
+              <h6
+                class="text-light"
+                [innerHTML]="message?.message | linkify"
+              ></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div>
+    <div class="chat-detail__footer">
+      <div class="chat-detail__left">
+        <span
+          class="material-symbols-outlined attachment"
+          style="padding-right: 1rem; cursor: pointer"
+          (click)="toggled = !toggled"
+          [(emojiPickerIf)]="toggled"
+          [emojiPickerDirection]="'top'"
+          (emojiPickerSelect)="handleSelection($event)"
+        >
+          add_reaction
+        </span>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="sendInputValue"
+          #inputRef
+          (keyup.enter)="onSendMessage(inputRef.value)"
+          [placeholder]="'CHAT_PAGE.MESSAGE' | translate"
+        />
+      </div>
+      <div class="chat-detail__right">
+        <a (click)="onSendMessage(inputRef.value)">
+          <span class="material-icons-outlined material-icon-font-outlined">
+            send
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

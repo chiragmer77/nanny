@@ -1,0 +1,83 @@
+
+.invalid{
+    color:orange !important;
+  font-size: 12px !important;
+  }
+ 
+h5,h4 {
+    font-weight: 550;
+    color: #ff4b91;
+}
+.edit-profile{
+    .row{
+        margin-right: -5px;
+    margin-left: -5px;
+    .col-md-6,.col-md-4,.col-md-8,.col-md-12,.col-md-3{
+        padding-left: 5px;
+    padding-right: 5px;
+    }
+    }
+}
+.bg-lighten{
+    background: #f3f3f3;
+    padding: 10px;
+    border-radius: 5px;
+}
+.w-100{
+    width: 100%;
+}
+.edit-profile__flex{
+    align-items: normal;
+}
+h4{
+    font-family: "Poppins", sans-serif; font-weight: 600;
+}
+.mat-typography h4{
+    font-size: 1.6rem;
+}
+.font-weight-bold{
+    font-weight: 500;
+}
+@media(max-width:767px) {
+
+    .col-md-4,
+    .col-md-6 {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+
+    .form-control {
+        &--textarea {
+            margin-bottom: 3rem;
+        }
+    }
+
+    // .MT-4 {
+    //     margin-top: 0rem !important;
+    // }
+
+    .mobile-field-inner {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .row {
+        flex-wrap: nowrap;
+    }
+}
+textarea{
+    &::-webkit-scrollbar {
+        width: 8px;               /* width of the entire scrollbar */
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgb(235, 235, 235);        /* color of the tracking area */
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: rgb(158, 158, 158);    /* color of the scroll thumb */
+        border-radius: 20px;       /* roundness of the scroll thumb */
+     
+      }
+}

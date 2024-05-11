@@ -1,0 +1,52 @@
+@import "../../.././../../../assets/scss/abstracts/abstracts";
+
+.chat {
+  margin-top: 4.8rem;
+
+  &__flex {
+    border: 1px solid rgba($black-color, 0.1);
+    display: flex;
+    position: relative;
+    border-radius: 1.6rem;
+  }
+
+  &__list {
+    width: 30%;
+  }
+
+  &__detail {
+    width: 70%;
+  }
+}
+.hide-on-mobile {
+  display: block;
+}
+
+
+@media (max-width: 768px) { 
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-on-mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .chat {
+    &__flex {
+      flex-direction: column;
+    }
+
+    &__list {
+      width: 100%;
+    }
+
+    &__detail {
+      width: 100%;
+    }
+  }
+}

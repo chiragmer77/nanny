@@ -1,0 +1,76 @@
+<div class="home footer">
+  <div class="container">
+    <div class="row PT-3">
+      <div class="col-md-4 PL-0">
+        <a (click)="onHome()" class="home__logo">
+          <img src="../../../../assets/images/logo-2.png" />
+          <h4>{{ "FOOTER.NANNY_AUPAIR" | translate }}</h4>
+        </a>
+      </div>
+
+      <div class="col-md-8 MT-1 text-right PR-0">
+        <div class="home__menu">
+          <ul>
+            <li>
+              <a [routerLink]="familyUrl" routerLinkActive="active">{{
+                "FOOTER.FAMILY_LINK" | translate
+              }}</a>
+            </li>
+
+            <li>
+              <a [routerLink]="aupairCountryUrl" routerLinkActive="active">{{
+                "FOOTER.AUPAIR_LINK" | translate
+              }}</a>
+            </li>
+
+            <li>
+              <a [routerLink]="contactUrl" routerLinkActive="active">{{
+                "FOOTER.CONTACT_LINK" | translate
+              }}</a>
+            </li>
+
+            <li>
+              <a [routerLink]="termsUrl" routerLinkActive="active">{{
+                "FOOTER.TERM_LINK" | translate
+              }}</a>
+            </li>
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="home__border"></div>
+
+    <div class="home__sub-footer">
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <p>{{ "FOOTER.COPYRIGHT" | translate }}</p>
+        </div>
+
+        <div class="col-md-8 text-right PR-0">
+          <ul>
+            <li>
+              <a>
+                <img src="assets/images/instagram.png" />
+              </a>
+            </li>
+
+            <li>
+              <a>
+                <img src="assets/images/facebook.png" />
+              </a>
+            </li>
+
+            <li>
+              <a>
+                <img src="assets/images/x-logo.png" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

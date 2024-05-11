@@ -1,0 +1,120 @@
+<div class="view-profile" [ngClass]="{ container: !familyId }">
+  <div class="view-profile__header">
+    <div class="row">
+      <div class="col-md-6 PL-0">
+        <h3>Welcome {{ familyDetail?.firstName }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="!this.familyDetail?.profilePhotoPresent && !this.familyDetail?.jobDescriptionPresent && messagedisappeared">
+    profile picture and description is needed
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="!this.familyDetail?.profilePhotoPresent && this.familyDetail?.jobDescriptionPresent && messagedisappeared">
+    Profile picture need to be added.
+  </div>
+  <div class="alert alert-warning" role="alert" *ngIf="this.familyDetail?.profilePhotoPresent && !this.familyDetail?.jobDescriptionPresent && messagedisappeared">
+    Description need to be added.
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-xs-12 PL-0 MB-2-half">
+      <div class="card">
+        <div class="card-body">
+          <img class="img-fluid imagecurve " *ngIf="!isLoading"
+            [src]="familyDetail?.profilePhotoPresent ? familyDetail?.profilePhoto : 'assets/images/profile-picture-default.png'" />
+
+          <div class="mt-3" align="center">
+
+            <p class="text-muted font-size-sm">Cityd, Country</p>
+
+            <button class="secondary-btn secondary-btn--height MR-1 MB-1" mat-flat-button color="primary" type="submit">
+              View
+            </button>
+            <button class="secondary-btn secondary-btn--height MR-1 MB-1" mat-flat-button color="primary" type="submit"
+              (click)="onEditProfile()">Edit Profile
+            </button>
+            <button class="secondary-btn secondary-btn--height MR-1 MB-1" mat-flat-button color="primary"
+              type="submit">Share
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9 col-lg-9 col-xs-12">
+      <div class="card2">
+        <div class="card-body">
+          <div class="info-details">
+            <div class="row">
+              <div class="col-md-6 col-xs-6 col-lg-6">
+                <div class="border-chip">
+                  <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+                    calendar_month
+                  </span>
+                  <span class="align-middle">
+                    {{ "FAMILY_VIEW_PROFILE.LOOKING_FROM" | translate }}
+                    {{ familyDetail?.lookingFrom | date : "MMM-YYYY" }}
+
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xs-6 col-lg-3">
+                <div class="border-chip">
+                  <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+                    woman
+                  </span>
+                  <span class="align-middle">
+                    {{ "FAMILY_VIEW_PROFILE.AUPAIR_AGE" | translate }}
+                    {{ familyDetail?.aupairAgeFrom }}-{{ familyDetail?.aupairAgeTo }}
+
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-xs-6 col-lg-3">
+                <div class="border-chip">
+                  <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+                    toys
+                  </span>
+                  <span class="align-middle">
+                    <!--{{ getDuration(familyDetail?.durationOfStay) }}-->
+                    {{ familyDetail?.noOfChildren }} Children
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xs-12 col-lg-3">
+                <div class="border-chip">
+                  <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+                    emoji_emotions
+                  </span>
+                  <span class="align-middle">
+                    {{ "Kids Age" | translate }} {{ getListKidsAgeGroup(familyDetail?.listKidsAgeGroup) }}
+                  </span>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="row">
+              <p class="search-submit"><b>This is a newly launched website. So will take few more weeks for more host
+                  families to sign
+                  up</b></p>
+            </div>
+            <div class="display-inline search-submit">
+              <button class="secondary-btn secondary-btn--height MR-1 MB-1" mat-flat-button color="primary"
+                type="submit" [routerLink]="searchUrl">
+                {{ "AUPAIR_SEARCH_PAGE.SEARCH_BTN" | translate }}
+              </button>
+              <button class="secondary-btn secondary-btn--height MR-1 MB-1" mat-flat-button color="primary"
+                type="submit" (click)="chatUrl">
+                Chat
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

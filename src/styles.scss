@@ -1,0 +1,227 @@
+@use "@angular/material"as mat;
+@include mat.all-legacy-component-typographies();
+@include mat.legacy-core();
+@import 'ngx-toastr/toastr';
+
+.toast-info{
+  background-color: #ff4b91;
+}
+.toast-success{
+  background-color: #ff4b91;
+}
+.toast-bottom-center{
+  padding-bottom: 5%;
+}
+$my-palette-primary: (50: #fdede5,
+  100: #fbd1be,
+  200: #f9b393,
+  300: #f69567,
+  400: #f47e47,
+  500: #ff4b91,
+  600: #f05f22,
+  700: #ee541c,
+  800: #ec4a17,
+  900: #e8390d,
+  A100: #ffffff,
+  A200: #ffe5e0,
+  A400: #ffbbad,
+  A700: #ffa594,
+  contrast: (50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #000000,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$my-palette-accent: (50: #e0e0e0,
+  100: #b3b3b3,
+  200: #808080,
+  300: #4d4d4d,
+  400: #262626,
+  500: #000000,
+  600: #000000,
+  700: #000000,
+  800: #000000,
+  900: #000000,
+  A100: #a6a6a6,
+  A200: #8c8c8c,
+  A400: #737373,
+  A700: #666666,
+  contrast: (50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$nanny-aupair-frontend-primary: mat.define-palette($my-palette-primary);
+$nanny-aupair-frontend-accent: mat.define-palette($my-palette-accent);
+$nanny-aupair-frontend-warn: mat.define-palette(mat.$red-palette);
+
+$nanny-aupair-dark-primary: mat.define-palette($my-palette-accent);
+$nanny-aupair-dark-accent: mat.define-palette($my-palette-primary);
+$nanny-aupair-dark-warn: mat.define-palette(mat.$red-palette);
+$nanny-aupair-frontend-theme: mat.define-light-theme((color: (primary: $nanny-aupair-frontend-primary,
+      accent: $nanny-aupair-frontend-accent,
+      warn: $nanny-aupair-frontend-warn,
+    ),
+    density: -1,
+  ));
+
+@include mat.all-legacy-component-themes($nanny-aupair-frontend-theme);
+
+@import "./assets/scss/main.scss";
+
+// .cdk-overlay-connected-position-bounding-box {
+//   top: 170px !important;
+// }
+
+.router-outlet-body {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 221px);
+  margin: 0;
+}
+
+.mat-select-fixed-width {
+  display: flex;
+  flex-direction: column;
+  width: 200px !important;
+}
+
+.cdk-overlay-pane {
+  justify-content: end;
+  background: none !important;
+}
+.mat-mdc-menu-content {
+  background: white !important;
+}
+
+.mat-mdc-form-field-bottom-align::before {
+  content: none !important;
+  display: none !important;
+  height: 0px !important;
+}
+
+.mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix::after {
+  color: rgba($black-color, 0.25) !important;
+}
+
+.mat-mdc-standard-chip {
+  border-radius: 6px !important;
+}
+
+.mat-mdc-icon-button svg {
+  vertical-align: text-top !important;
+}
+
+
+.material-symbols-outlined{
+  font-family: 'Material Icons Outlined' !important;
+}
+
+.tooltip-message-box{
+  .material-symbols-outlined{
+    position: relative;
+    top: 6px;
+  }
+}
+
+/* Shared */
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.6px;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 30px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Google Sans", arial, sans-serif;
+  color: #FFF;
+  width: 98%;
+}
+.loginBtn:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.loginBtn:focus {
+  outline: none;
+}
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+
+
+/* Facebook */
+.loginBtn--facebook {
+  background-color: rgb(26, 119, 242);
+  background-image: linear-gradient(rgb(26, 119, 242), rgb(26, 119, 242));
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354C8C;
+}
+.loginBtn--facebook:before {
+  border-right: rgb(26, 119, 242) 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+}
+
+
+/* Google */
+.loginBtn--google {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background: #DD4B39;
+}
+.loginBtn--google:before {
+  border-right: #BB3F30 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+}
+.loginBtn--google:hover,
+.loginBtn--google:focus {
+  background: #E74B37;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1); /* Change this to the desired color */
+  margin: 0 10px; /* Adjust spacing as needed */
+}
+
+.divider-text {
+  font-weight: normal; /* Optional */
+  color:  rgba(0, 0, 0, 0.6);
+}

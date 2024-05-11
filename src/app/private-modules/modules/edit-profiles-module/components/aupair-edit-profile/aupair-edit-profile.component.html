@@ -1,0 +1,573 @@
+<div class="edit-profile">
+  <div class="container">
+    
+        <h3>{{ "AUPAIR_EDIT.TITLE" | translate }}</h3>
+        <p class="MB-2">{{ "AUPAIR_EDIT.SUB_TITLE" | translate }}</p>
+     
+
+      <!-- <div class="col-md-4 PR-0">
+        <a class="edit-profile__registration">
+          <span class="material-icons-outlined material-icon-font-outlined">
+            chevron_right
+          </span>
+
+          <div>
+            <img src="assets/images/registration.png" />
+          </div>
+
+          <div>
+            <b>Your registration is incomplete.</b>
+            <small>Do it now to find better match of your choice.</small>
+          </div>
+        </a>
+      </div> -->
+  
+
+<div class="row">
+  <div class="col-md-12">
+    <app-upload-images
+    [profilePhotos]="profilePhotos"
+    [otherPhotos]="otherPhotos"
+    [isLoading]="isLoading"
+  ></app-upload-images>
+  </div>
+</div>
+
+
+    <form
+  [formGroup]="aupairProfileForm"
+  (submit)="onAupairEditProfileSubmit(aupairProfileForm)"
+>
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="MB-2">
+      {{ "AUPAIR_EDIT.GENERAL_INFORMATION" | translate }}
+    </h4>
+
+    <div class="row">
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.FIRST_NAME" | translate
+            }}</mat-label>
+            <input
+              [placeholder]="
+                'AUPAIR_EDIT.ENTER_FIRST_NAME' | translate
+              "
+              matInput
+              formControlName="firstName"
+              autocomplete="off"
+            />
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['firstName']?.dirty || f?.['firstName']?.touched)) && f?.['firstName']?.errors && f?.['firstName']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_FIRSTNAME" | translate }}</mat-error>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.LAST_NAME" | translate
+            }}</mat-label>
+            <input
+              [placeholder]="
+                'AUPAIR_EDIT.ENTER_LAST_NAME' | translate
+              "
+              matInput
+              formControlName="lastName"
+              autocomplete="off"
+            />
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['lastName']?.dirty || f?.['lastName']?.touched)) && f?.['lastName']?.errors && f?.['lastName']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_LASTNAME" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.GENDER" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="gender">
+              <mat-option
+                *ngFor="let gender of genders"
+                [value]="gender.value"
+              >
+                {{ gender.text }}
+              </mat-option>
+            </mat-select>
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['gender']?.dirty || f?.['gender']?.touched)) && f?.['gender']?.errors && f?.['gender']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_GENDER" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ "AUPAIR_EDIT.AGE" | translate }}</mat-label>
+            <mat-select placeholder="Select" formControlName="age">
+              <mat-option *ngFor="let age of fromAgeList" [value]="age">
+                {{ age }}
+              </mat-option>
+            </mat-select>
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['age']?.dirty || f?.['age']?.touched)) && f?.['age']?.errors && f?.['age']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_AGE" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.LANGUAGES" | translate
+            }}</mat-label>
+            <mat-select
+              placeholder="Select"
+              formControlName="listLanguageIds"
+              multiple
+            >
+              <mat-option
+                *ngFor="let language of languages"
+                [value]="language.value"
+              >
+                {{ language.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.PRESENT_CITY" | translate
+            }}</mat-label>
+            <input
+              [placeholder]="
+                'AUPAIR_EDIT.ENTER_PRESENT_CITY' | translate
+              "
+              formControlName="presentCity"
+              matInput
+              autocomplete="off"
+            />
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['presentCity']?.dirty || f?.['presentCity']?.touched)) && f?.['presentCity']?.errors && f?.['presentCity']?.errors?.['required']">{{ "AUPAIR_EDIT.VAL_PRECENTCITY" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.PRESENT_COUNTRY" | translate
+            }}</mat-label>
+           <mat-select placeholder="Select" formControlName="presentCountry">
+            <mat-optgroup
+              *ngFor="let countryGroup of aupairCountry"
+              [label]="countryGroup.title">
+              <mat-option
+                *ngFor="let item of countryGroup.items"
+                [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+          <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['presentCountry']?.dirty || f?.['presentCountry']?.touched)) && f?.['presentCountry']?.errors && f?.['presentCountry']?.errors?.['required']"> {{ "AUPAIR_EDIT.PRESENT_COUNTRY" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.CITIZEN" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="citizenOf">
+              <mat-optgroup
+                *ngFor="let countryGroup of aupairCountry"
+                [label]="countryGroup.title">
+                <mat-option
+                  *ngFor="let item of countryGroup.items"
+                  [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['citizenOf']?.dirty || f?.['citizenOf']?.touched)) && f?.['citizenOf']?.errors && f?.['citizenOf']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_CITIZENOF" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.RELIGION" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="religion">
+              <mat-option
+                *ngFor="let religion of religions"
+                [value]="religion.value"
+              >
+                {{ religion.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.PROFESSION" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="profession">
+              <mat-option
+                *ngFor="let profession of professionList"
+                [value]="profession.value"
+              >
+               {{ "profession." + profession.text | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.EDUCATION" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="education">
+              <mat-option
+                *ngFor="let education of educationList"
+                [value]="education.value"
+              >
+                {{ education.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.EMAIL" | translate
+            }}</mat-label>
+            <input
+              [placeholder]="'AUPAIR_EDIT.ENTER_EMAIL' | translate"
+              formControlName="email"
+              [disableFormControl]="true"
+              matInput
+              autocomplete="off"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.STATUS" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="status">
+              <mat-option
+                *ngFor="let status of statusList"
+                [value]="status.value"
+              >
+                {{ status.text }}
+              </mat-option>
+            </mat-select>
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['status']?.dirty || f?.['status']?.touched)) && f?.['status']?.errors && f?.['status']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_STATUS" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row"
+      *ngIf="formControls['status'].value == statusEnum.REMATCH"
+    >
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.REMATCH_MONTH" | translate
+            }}</mat-label>
+            <mat-select
+              [placeholder]="'COMMON.SELECT' | translate"
+              formControlName="rematchMonthsLeft"
+            >
+              <mat-option
+                *ngFor="let month of rematchMonthList"
+                [value]="month"
+              >
+                {{ month }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6">
+        <div class="form-control">
+          <mat-form-field appearance="outline">
+            <mat-label>{{
+              "AUPAIR_EDIT.REMATCH_COUNTRY" | translate
+            }}</mat-label>
+            <mat-select placeholder="Select" formControlName="rematchCountry">
+              <mat-option
+                *ngFor="let country of countries"
+                [value]="country.value"
+              >
+                {{ country.text }}
+              </mat-option>
+            </mat-select>
+            <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['rematchCountry']?.dirty || f?.['rematchCountry']?.touched)) && f?.['rematchCountry']?.errors && f?.['rematchCountry']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_REMATCHCOUNTRY" | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="col-md-12">
+ 
+<div class="bg-lighten">
+    <h4 class="">
+      {{ "AUPAIR_EDIT.CONDITIONS" | translate }}
+    </h4>
+
+    <div class="row">
+     
+      <div class="col-md-4 col-xs-6">
+        <mat-checkbox formControlName="canBike">{{
+          "AUPAIR_EDIT.CONDITION_ONE" | translate
+        }}</mat-checkbox>
+      </div>
+
+      <div class="col-md-4 col-xs-6">
+        <mat-checkbox formControlName="drivingLicence">{{
+          "AUPAIR_EDIT.CONDITION_TWO" | translate
+        }}</mat-checkbox>
+      </div>
+
+      <div class="col-md-4 col-xs-6">
+        <mat-checkbox formControlName="nonSmoker">{{
+          "AUPAIR_EDIT.CONDITION_THREE" | translate
+        }}</mat-checkbox>
+      </div>
+ 
+
+  
+      <div class="col-md-4 col-xs-6">
+        <mat-checkbox formControlName="childCareExperience">{{
+          "AUPAIR_EDIT.CONDITION_FOUR" | translate
+        }}</mat-checkbox>
+      </div>
+
+      <div class="col-md-4 col-xs-6">
+        <mat-checkbox formControlName="aupairExperience">{{
+          "AUPAIR_EDIT.CONDITION_FIVE" | translate
+        }}</mat-checkbox>
+      </div>
+
+      <div class="col-md-4 col-xs-6">
+        <mat-checkbox formControlName="specialNeedPeople">{{
+          "AUPAIR_EDIT.CONDITION_SIX" | translate
+        }}</mat-checkbox>
+      </div>
+    </div>
+
+  </div>
+    </div>
+ 
+</div>
+  <h4 class="MB-1-half MT-2 w-100 font-weight-bold">
+    {{ "AUPAIR_EDIT.AUPAIR_ABOUT" | translate }}
+  </h4>
+
+  <div class="row">
+    <div class="col-md-6 MB-2">
+      <div class="form-control form-control--height form-control--textarea">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.DESCRIPTION" | translate
+          }}</mat-label>
+          <textarea
+            [placeholder]="
+              'AUPAIR_EDIT.ENTER_DESCRIPTION' | translate
+            "
+            formControlName="aupairDescription"
+            autocomplete="off"
+            matInput
+          ></textarea>
+          <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['aupairDescription']?.dirty || f?.['aupairDescription']?.touched)) && f?.['aupairDescription']?.errors && f?.['aupairDescription']?.errors?.['required']"> {{ "AUPAIR_EDIT.VAL_DESCRIPTION" | translate }}</mat-error>
+          <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['aupairDescription']?.dirty || f?.['aupairDescription']?.touched)) && f?.['aupairDescription']?.errors && !f?.['aupairDescription']?.errors?.['required'] && f?.['aupairDescription']?.errors?.['minCharacters']"> {{ "AUPAIR_EDIT.VAL_DESCRIPTION_MINLENGTH" | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-md-6 MB-2">
+      <div class="form-control form-control--height form-control--textarea">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.LETTER_HOST" | translate
+          }}</mat-label>
+          <textarea
+            [placeholder]="
+              'AUPAIR_EDIT.ENTER_LETTER_HOST' | translate
+            "
+            autocomplete="off"
+            formControlName="letterToHost"
+            matInput
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-control form-control--height form-control--textarea">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.EXPERIENCE" | translate
+          }}</mat-label>
+          <textarea
+            [placeholder]="
+              'AUPAIR_EDIT.ENTER_EXPERIENCE' | translate
+            "
+            autocomplete="off"
+            formControlName="experience"
+            matInput
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="MT-2 MB-2-half">
+    {{ "AUPAIR_EDIT.PREFERENCE" | translate }}
+  </h4>
+
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <div class="form-control">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.PREFERRED_COUNTRY" | translate
+          }}</mat-label>
+          <mat-select
+            placeholder="Select"
+            multiple
+            formControlName="listFamilyCountries"
+          >
+            <mat-optgroup
+              *ngFor="let countryGroup of continentAndCountries"
+              [label]="countryGroup.title"
+            >
+              <mat-option
+                *ngFor="let item of countryGroup.items"
+                [value]="item.value"
+              >
+                {{ item.text }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+      <div class="form-control">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.PREFERRED_KID" | translate
+          }}</mat-label>
+          <mat-select
+            placeholder="Select"
+            multiple
+            formControlName="listHostKidsAge"
+          >
+            <mat-option *ngFor="let age of hostAgeList" [value]="age.value">
+              {{ age.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+      <div class="form-control">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.AVAILABLE_FROM" | translate
+          }}</mat-label>
+          <input
+            [placeholder]="'AUPAIR_EDIT.AVAILABLE_FROM' | translate"
+            [min]="minDate"
+            formControlName="availableFrom"
+            matInput
+            [matDatepicker]="availableFromPicker"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="availableFromPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #availableFromPicker
+            startView="multi-year"
+            (monthSelected)="setMonthAndYear($event, availableFromPicker)"
+            panelClass="example-month-picker"
+          >
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+      <div class="form-control">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            "AUPAIR_EDIT.DURATION" | translate
+          }}</mat-label>
+          <mat-select placeholder="Select" formControlName="durationOfStay">
+            <mat-option
+              *ngFor="let duration of durationOfStayList"
+              [value]="duration.value"
+            >
+              {{ duration.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div>
+    <button class="secondary-btn MR-1" mat-flat-button color="primary">
+      {{ "AUPAIR_EDIT.UPDATE_BTN" | translate }}
+    </button>
+
+    <button
+      (click)="onCancel()"
+      type="button"
+      class="primary-btn"
+      mat-stroked-button
+    >
+      {{ "AUPAIR_EDIT.CANCEL_BTN" | translate }}
+    </button>
+  </div>
+
+
+ 
+</form>
+  </div>
+</div>

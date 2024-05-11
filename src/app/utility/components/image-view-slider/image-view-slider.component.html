@@ -1,0 +1,37 @@
+<div class="image-view-slider">
+  <div>
+    <div class="image-view-slider__img">
+      <img [src]="this.selectedPreviewPicture?.src" alt="" />
+    </div>
+  </div>
+  <div>
+    <a (click)="onCloseClick()">
+      <span
+        matTooltip="Close"
+        class="material-icons-outlined material-icon-font-outlined"
+      >
+        close
+      </span>
+    </a>
+  </div>
+  <ng-container>
+    <div>
+      <button
+        [disabled]="selectedPreviewPicture.id === 0"
+        (click)="handlePreviousClick()"
+        class="material-icons-outlined material-icon-font-outlined button-left"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button
+        (click)="handleNextClick()"
+        [disabled]="selectedPreviewPicture.id + 1 === previewPictures.length"
+        class="material-icons-outlined material-icon-font-outlined button-right"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+</div>

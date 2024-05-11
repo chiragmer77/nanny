@@ -1,0 +1,185 @@
+@import "../../../../../../assets/scss/abstracts/abstracts";
+
+.max-image-profile {
+  border-radius: 1rem;
+  height: 18rem;
+  width: 30rem;
+
+  @include respond("phone"){
+    height: 24rem;
+  }
+}
+
+.view-profile {
+  &__header {
+    button {
+      background: rgba($black-color, 0.1);
+      border: transparent;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+
+      &:focus {
+        outline: none;
+      }
+
+      .mat-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: bottom;
+        font-size: 1.8rem;
+      }
+    }
+
+    .line {
+      border-left: 1px solid rgba($black-color, 0.1);
+      vertical-align: text-bottom;
+      display: inline-block;
+      height: 3rem;
+      margin: 0 3.2rem;
+    }
+
+    .chat-bg {
+      background: rgba($french_rose, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+
+      span {
+        color: $french_rose;
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+@media(max-width:600px) {
+  .view-profile {
+    &__flex {
+      flex-wrap: wrap;
+      margin-bottom: 0rem;
+    }
+
+    &__details {
+      width: 50%;
+      margin-bottom: 1.6rem;
+    }
+
+    &__content {
+      ul {
+        li {
+          width: 100%;
+        }
+      }
+    }
+
+    &__header {
+      .row {
+        position: relative;
+
+        div {
+
+          h3,
+          p {
+            margin-bottom: 1.4rem;
+          }
+
+          a {
+            position: absolute;
+            top: -8.8rem;
+            right: 0.4rem;
+          }
+
+          .btn {
+            position: absolute;
+            top: -17rem;
+            right: 11rem;
+
+            &__next {
+              position: absolute;
+              top: -17rem;
+              right: 6rem;
+
+            }
+
+            &__close {
+              position: absolute;
+              top: -16.7rem !important;
+              right: 0rem;
+            }
+
+            &__edit {
+              position: absolute;
+              top: -16rem;
+              right: 0rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .view-profile {
+    &__content {
+      ul {
+        li {
+          width: 40%;
+        }
+      }
+    }
+
+    &__header {
+      .row {
+        position: relative;
+
+        div {
+
+          a {
+            position: absolute;
+            top: -8.8rem;
+            right: 0.4rem;
+          }
+
+          .btn {
+            position: absolute;
+            top: -17rem;
+            right: 11rem;
+
+            &__next {
+              position: absolute;
+              top: -17rem;
+              right: 6rem;
+
+            }
+
+            &__close {
+              position: absolute;
+              top: -16.3rem !important;
+              right: 0rem;
+            }
+
+            &__edit {
+              position: absolute;
+              top: -15rem;
+              right: 0rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .other-img {
+    width: 33.33%;
+
+    .max-image-profile {
+      width: 24rem;
+    }
+  }
+}

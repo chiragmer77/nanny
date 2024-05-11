@@ -1,0 +1,103 @@
+<div class="auth">
+  <div class="container">
+    <div class="row MT-4-half">
+      <div class="col-md-7 PL-0">
+        <div class="row">
+          <div class="col-md-8 PL-0">
+            <div class="auth__body">
+              <form [formGroup]="loginForm" (submit)="onLoginSubmit(loginForm)">
+                <h4>{{ "LOGIN_PAGE.TITLE" | translate }}</h4>
+
+                <p>{{ "LOGIN_PAGE.SUB_TITLE" | translate }}</p>
+
+                <div class="row">
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <mat-error class="input-error" *ngIf="!f['email'].valid && f['email'].touched">
+                      {{ getErrorEmail() }}
+                    </mat-error>
+                    <div class="form-control">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "LOGIN_PAGE.EMAIL" | translate
+                          }}</mat-label>
+                        <input [placeholder]="'LOGIN_PAGE.ENTER_EMAIL' | translate" matInput type="email"
+                          formControlName="email" autocomplete="off" />
+
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <mat-error class="input-error" *ngIf="!f['password'].valid && f['password'].touched">
+                      {{ getErrorPassword() }}
+                    </mat-error>
+                    <div class="form-control form-control--height">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "LOGIN_PAGE.PASSWORD" | translate
+                          }}</mat-label>
+                        <input [placeholder]="
+                            'LOGIN_PAGE.ENTER_PASSWORD' | translate
+                          " matInput type="password" formControlName="password" autocomplete="off" />
+
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <a class="primary-link" (click)="onForgotPassword()">
+                      {{ "LOGIN_PAGE.FORGOT_PASSWORD" | translate }}
+                    </a>
+                  </div>
+
+                  <div class="col-md-12 PL-0 PR-0 MT-2-half">
+                    <!-- (click)="onCompleteRegistration()" -->
+                    <button class="secondary-btn width-100 btn-height" mat-flat-button color="primary"
+                      [disabled]="loginForm.invalid">
+                      {{ "LOGIN_PAGE.LOGIN_BTN" | translate }}
+                    </button>
+                  </div>
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0 MT-1-half">
+                    <small class="contact-chat">{{ "LOGIN_PAGE.ACCOUNT" | translate }}
+                      <a (click)="onRegister()">{{
+                        "LOGIN_PAGE.REGISTER_LINK" | translate
+                        }}</a></small>
+                  </div>
+                </div>
+              </form>
+              <div class="row MT-2">
+                <div class="col-md-12 col-xs-12 PL-0 PR-0 MT-1-half MB-2 text-center">
+                  <div class="login-divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-text">or login with</span>
+                    <span class="divider-line"></span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 PL-0 PR-0 MT-1-half">
+                  <button class="loginBtn loginBtn--facebook" (click)="signInWithFB()">
+                    Sign in with Facebook
+                  </button>
+                  <!-- <div class="fb-login-button" data-width="200" data-size="medium" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+                  <!-- <asl-google-signin-button type="standard" theme='outline' size='medium'></asl-google-signin-button> -->
+                </div>
+                <div class="col-md-6 col-xs-12 PL-0 PR-0 MT-1-half">
+                  <!-- <asl-google-signin-button type='standard' theme="filled_blue" width="225" size='medium'></asl-google-signin-button> -->
+                  <app-google-sso-login [clientId]="googleClientId" [data]="loginForm" [prefix]="'Sign in'" (onSigninSuccess)="onGoogleSigninSuccess($event)"></app-google-sso-login>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 text-right PR-0">
+        <div class="vh-80">
+          <app-auth-right-part></app-auth-right-part>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

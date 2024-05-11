@@ -1,0 +1,92 @@
+@import "../../../../../../assets/scss/abstracts/abstracts";
+
+.auth {
+  img {
+    width: 100%;
+  }
+  
+  &__body {
+    margin-top: 12rem;
+
+    @include respond("phone"){
+      margin-top: 2rem;
+    }
+  }
+
+  &__paymnet-required {
+    background: rgba($blue_green, 0.05);
+    padding: 1rem;
+    border-radius: 0.8rem;
+
+    .payment-flex {
+      display: flex;
+      align-items: center;
+
+      &__left {
+        width: 3rem;
+        margin-top: 1rem;
+        margin-right: 1.6rem;
+
+        .material-icon-font-outlined {
+          color: $blue_green;
+        }
+      }
+
+      &__right {
+        width: calc(100% - 3rem);
+
+        p {
+          color: $blue_green;
+          font-size: 1.4rem;
+          font-weight: 500;
+          margin: 0;
+
+          b {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+.invalid{
+  color:red !important;
+font-size: 12px !important;
+}
+.pad-user-type{
+  padding-left: 17px;
+}
+.vh-80{
+  height: 80vh;
+  overflow: hidden;
+  width: 100%;
+  }
+@media(max-width:767px) {
+  .col-md-5 {
+    display: none;
+  }
+
+  .col-md-7,
+  .col-md-8 {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .container {
+    .row {
+      justify-content: center;
+      align-items: flex-end;
+    }
+  }
+
+  .col-md-7,
+  .col-md-5 {
+    width: 50%;
+  }
+}
+.mdc-radio{
+  padding-left: 0px;
+}
+

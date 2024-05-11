@@ -1,0 +1,349 @@
+<div class="view-profile PT-1" [ngClass]="{ container: !aupairId && !profileNumber }">
+
+  <div class="view-profile__header">
+
+    <div class="row">
+      <div class="col-md-8 col-xs-7">
+        <h2 class="PB-0 MB-0">{{ aupairDetail?.firstName }}</h2>
+      </div>
+      <div class="col-md-4 col-xs-5 text-right PB-1">
+        <a *ngIf="!aupairId && !profileNumber" (click)="onEditProfile()" class="btn__edit">
+          <span matTooltip="Edit Profile" class="material-icons-outlined material-icon-font-outlined">
+            edit
+          </span>
+        </a>
+        <a *ngIf="closeIcon != 'aupair'" (click)="onCloseDialog()" class="ML-2 btn__close">
+          <span matTooltip="Close" class="material-icons-outlined material-icon-font-outlined">
+            close
+          </span>
+        </a>
+      </div>
+      <div class="row col-md PB-2">
+        <div class="col-md-5 col-xs-12">
+          <span class="material-icons-outlined material-icon-font-outlined align-middle fs-24 grey-color">
+            location_on
+          </span>
+          <span class="align-middle grey-color">
+            {{ aupairDetail?.presentCity }} ,
+            {{ getCountryName(aupairDetail?.presentCountry) }}
+          </span>
+        </div>
+        <div class="col-md-3 col-xs-12 next-preview postion-relative" *ngIf="aupairId || profileNumber">
+          <div class="upper-side-section">
+            <button matTooltip="Previous" mat-fab extended color="primary" type="button" class="btn-primary"
+              (click)="onClickPrevious()">
+              <mat-icon>chevron_left</mat-icon>
+              Pre
+            </button>
+
+            <button matTooltip="Next" type="button" mat-fab extended color="primary" class="btn-primary ML-1"
+              (click)="onClickNext()" style="padding-right: 7px !important;">
+              Next
+              <span style="line-height: 21px;">
+                <mat-icon style="margin: 0;">chevron_right</mat-icon>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-5 text-right postion-relative">
+          <div class="upper-side-section-share">
+            <div class="float-right">
+
+
+              <div class="view-profile__header">
+                <div *ngIf="aupairId || profileNumber">
+                  <!-- <a (click)="onChatClick($event)" class="chat-bg mr-7">
+                    <span class="material-icons-outlined material-icon-font-outlined">
+                    chat_bubble_outline
+                  </span>
+                </a> -->
+
+                  <button (click)="onChatClick($event)" mat-fab extended class="btn-primary MR-1">
+                    <mat-icon>chat_bubble_outline</mat-icon>
+                    Chat
+                  </button>
+                  <a (click)="onClickFavoriteAupair(aupairDetail)" class="chat-bg">
+                    <span class="material-icons-outlined material-icon-font-outlined">
+                      {{ aupairDetail?.favorite ? "favorite" : "favorite_outline" }}
+                    </span>
+                  </a>
+                  <!-- <a (click)="toggleShareOptions()"class="chat-bg mr-2">
+          <span class="material-symbols-outlined"> share </span>
+        </a> -->
+
+                  <button class="chat-bg mr-7" mat-icon-button [matMenuTriggerFor]="menu">
+                    <span class="material-symbols-outlined"> share </span>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl" target="_blank"
+                      mat-menu-item class="gray-border">
+                      <svg class="svg-icon mr-2 align-middle" xmlns="http://www.w3.org/2000/svg" width="1.5em"
+                        height="2em" viewBox="0 0 32 32">
+                        <path fill="blue"
+                          d="M16 4C9.384 4 4 9.384 4 16s5.384 12 12 12s12-5.384 12-12S22.616 4 16 4m0 2c5.535 0 10 4.465 10 10a9.977 9.977 0 0 1-8.512 9.879v-6.963h2.848l.447-2.893h-3.295v-1.58c0-1.2.395-2.267 1.518-2.267h1.805V9.652c-.317-.043-.988-.136-2.256-.136c-2.648 0-4.2 1.398-4.2 4.584v1.923h-2.722v2.893h2.722v6.938A9.975 9.975 0 0 1 6 16c0-5.535 4.465-10 10-10" />
+                      </svg>
+                      <span class="menu-text menu-text-red "> Facebook</span>
+                    </a>
+                    <a [href]="'https://wa.me/?text=' + encodedUrl " target="_blank" mat-menu-item class="gray-border">
+
+                      <span class="material-symbols-outlined mr-2 align-middle menu-text-green">sms</span>
+                      <span class="menu-text menu-text-red align-middle">Whatsapp</span>
+                    </a>
+                    <a (click)="onCopyUrl()" mat-menu-item class="gray-border">
+                      <span class="material-symbols-outlined mr-2 align-middle menu-text-red">content_copy</span>
+                      <span class="menu-text menu-text-red align-middle">Copy Profile</span>
+                    </a>
+                  </mat-menu>
+
+
+                  <!-- <div class="share-options" *ngIf="showShareOptions">
+          <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl"  target="_blank">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 4C9.384 4 4 9.384 4 16s5.384 12 12 12s12-5.384 12-12S22.616 4 16 4m0 2c5.535 0 10 4.465 10 10a9.977 9.977 0 0 1-8.512 9.879v-6.963h2.848l.447-2.893h-3.295v-1.58c0-1.2.395-2.267 1.518-2.267h1.805V9.652c-.317-.043-.988-.136-2.256-.136c-2.648 0-4.2 1.398-4.2 4.584v1.923h-2.722v2.893h2.722v6.938A9.975 9.975 0 0 1 6 16c0-5.535 4.465-10 10-10"/></svg>
+          </a>
+          <a [href]="'https://wa.me/?text=' + encodedUrl"  target="_blank">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.188 8.188 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18c.21-.58.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+          </a>
+        </div> -->
+                  <!-- <a (click)="onCopyUrl()" class="chat-bg mr-2">
+          <span class="material-symbols-outlined">content_copy</span>
+        </a> -->
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="info-details">
+    <div class="row">
+      <div class="col-md-3 col-xs-6 col-lg-3">
+        <div class="border-chip">
+          <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+            cake
+          </span>
+          <span class="align-middle">
+            {{ aupairDetail?.age }} yrs
+            <!-- <span>{{ "AUPAIR_VIEW_PROFILE.AGE" | translate }}</span> -->
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-6 col-lg-3">
+        <div class="border-chip">
+          <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+            calendar_month
+          </span>
+          <span class="align-middle">
+            {{ "AUPAIR_VIEW_PROFILE.AVAILABLE_FROM" | translate }}
+            {{
+            aupairDetail?.availableFrom
+            | date : "MMM-YYYY"
+            | replaceNullWithText
+            }}
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-12 col-lg-3">
+        <div class="border-chip">
+          <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+            school
+          </span> {{ getEducation(aupairDetail?.education) }}
+
+        </div>
+      </div>
+
+      <div class="col-md-3 col-xs-12 col-lg-3">
+        <div class="border-chip">
+          <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+            work_outline
+          </span>
+          <span class="align-middle">
+            {{ getProfession(aupairDetail?.profession) }}
+            <!-- <i>{{ "AUPAIR_VIEW_PROFILE.PROFESSION" | translate }}</i> -->
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="img-border-area">
+    <div class="row">
+      <div class="col-md-3 col-xs-6 img-fit">
+        <img *ngIf="!isLoading" class="img-fluid" (click)="onClickImage(0)" [src]="
+          aupairDetail?.profilePhoto ||
+          aupairDetail?.profilePicture ||
+          'assets/images/profile-picture-default.png'
+        " />
+      </div>
+
+
+
+      <ng-container *ngIf="!isLoading">
+        <div class="col-md-3 col-xs-6 PL-0 img-fit" *ngFor="let img of aupairDetail?.otherPhotos; let i = index"
+          (click)="onClickImage(i + 1)">
+          <img class="img-fluid" [src]="img" />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+
+  <div class="info-details MT-2">
+    <div class="row">
+      <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+        <h4 class="grey-color MB-0">{{ "AUPAIR_VIEW_PROFILE.CITIZEN_OF" | translate }}</h4>
+        <p>{{ getCitizen(aupairDetail?.citizenOf) }}</p>
+      </div>
+
+      <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+        <h4 class="grey-color MB-0">{{ "AUPAIR_VIEW_PROFILE.DURATION" | translate }}</h4>
+        <p> {{
+          getDuration(aupairDetail?.durationOfStay) | replaceNullWithText
+          }} </p>
+
+      </div>
+      <!-- <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+    <h4 class="grey-color MB-0">{{ "AUPAIR_VIEW_PROFILE.DURATION" | translate }}</h4>
+    <p> {{
+      getDuration(aupairDetail?.durationOfStay) | replaceNullWithText
+    }}</p>
+       </div> -->
+
+      <div class="col-md-3 col-xs-6 col-lg-3 MB-2">
+        <h4 class="grey-color MB-0">{{ "AUPAIR_VIEW_PROFILE.LANGUAGES" | translate }}</h4>
+        <p><span class="align-middle" *ngFor="let lang of getLanguages(aupairDetail?.listLanguageIds)">
+            {{ lang }}
+          </span></p>
+
+      </div>
+      <div class="col-md-3 col-xs-6 col-lg-3 MB-2">
+        <h4 class="grey-color MB-0">Religion</h4>
+        <p>{{ getReligion(aupairDetail?.religion) }}</p>
+
+      </div>
+      <div class="col-md-3 col-xs-6 col-lg-3 MB-2">
+        <h4 class="grey-color MB-0">{{ "AUPAIR_VIEW_PROFILE.HOSTKIDS_AGE" | translate }}</h4>
+        <p>{{ getHostKidsAge(aupairDetail?.listHostKidsAge) ? getHostKidsAge(aupairDetail?.listHostKidsAge) : '-' }}</p>
+      </div>
+      <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+        <h4 class="MB-0">Status </h4>
+        <p> {{ getStatus(aupairDetail?.status) }} </p>
+
+      </div>
+      <div class="col-md-3 col-xs-12 col-lg-3 MB-2">
+        <h4 class="grey-color MB-0">{{ "AUPAIR_VIEW_PROFILE.LOOKING_IN" | translate }}</h4>
+        <ul>
+          <li *ngFor="
+                              let country of getCountries(
+                                aupairDetail?.listFamilyCountries
+                              ).slice(0, 3)
+                            ">
+            {{ country }}
+          </li>
+          <a class="btn-primary" *ngIf="getCountries(aupairDetail?.listFamilyCountries).length > 3" [matTooltip]="
+                              getCountries(aupairDetail?.listFamilyCountries).slice(3).join(',')
+                            ">+{{
+            getCountries(aupairDetail?.listFamilyCountries).slice(3).length
+            }}
+            more</a>
+        </ul>
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="view-profile__content">
+    <h4 class="MB-0">{{ "AUPAIR_VIEW_PROFILE.ABOUT_ME" | translate }}</h4>
+    <p>
+      {{ aupairDetail?.aupairDescription }}
+    </p>
+  </div>
+
+  <div class="view-profile__content">
+    <h4 class="MB-0">{{ "AUPAIR_VIEW_PROFILE.LETTER_HOST" | translate }}</h4>
+    <p [innerText]="aupairDetail?.letterToHost"></p>
+  </div>
+
+  <div class="view-profile__content">
+    <h4 class="MB-0">{{ "AUPAIR_VIEW_PROFILE.EXPERIENCE" | translate }}</h4>
+    <p [innerText]="aupairDetail?.experience"></p>
+  </div>
+
+  <div class="view-profile__content">
+    <h4 class="MB-0">{{ "AUPAIR_VIEW_PROFILE.ABLE" | translate }}</h4>
+
+    <ul>
+      <li *ngIf="aupairDetail?.canBike">
+        <p>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            check
+          </span>
+          {{ "AUPAIR_VIEW_PROFILE.CONDITION_ONE" | translate }}
+        </p>
+      </li>
+
+      <li *ngIf="aupairDetail?.drivingLicence">
+        <p>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            check
+          </span>
+          {{ "AUPAIR_VIEW_PROFILE.CONDITION_TWO" | translate }}
+        </p>
+      </li>
+
+      <li *ngIf="aupairDetail?.nonSmoker">
+        <p>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            check
+          </span>
+          {{ "AUPAIR_VIEW_PROFILE.CONDITION_THREE" | translate }}
+        </p>
+      </li>
+
+      <li *ngIf="aupairDetail?.childCareExperience">
+        <p>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            check
+          </span>
+          {{ "AUPAIR_VIEW_PROFILE.CONDITION_FOUR" | translate }}
+        </p>
+      </li>
+
+      <li *ngIf="aupairDetail?.aupairExperience">
+        <p>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            check
+          </span>
+          {{ "AUPAIR_VIEW_PROFILE.CONDITION_FIVE" | translate }}
+        </p>
+      </li>
+
+      <li *ngIf="aupairDetail?.specialNeedPeople">
+        <p>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            check
+          </span>
+          {{ "AUPAIR_VIEW_PROFILE.CONDITION_SIX" | translate }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<app-image-view-slider *ngIf="aupairDetail && pictureType" [previewPictures]="previewPictures"
+  (close)="onCloseSlider()"></app-image-view-slider>

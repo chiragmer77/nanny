@@ -1,0 +1,320 @@
+@import "../../../../../../assets/scss/abstracts/abstracts";
+
+.round-icon {
+  background-color: #FFB5D2; 
+  border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-right: 1.6rem;
+  color: green; 
+}
+
+.icon-missed {
+  color: red; 
+}
+
+.icon-no-answer {
+  color: gray; 
+}
+.chat-detail {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba($black-color, 0.1);
+    padding: 1rem 1.5rem;
+
+    &-left {
+      display: flex;
+      align-items: center;
+      padding-top: 16px;
+      div {
+        img {
+          @include square(3.2rem);
+          border-radius: 50%;
+          margin-right: 1.6rem;
+          object-fit: cover;
+        }
+      }
+
+      div {
+        h4 {
+          font-size: 1.6rem;
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+
+      a {
+        .material-symbols-outlined {
+          display: none;
+
+          @media(max-width: 767px) {
+            display: block;
+            margin-right: 3rem;
+          }
+        }
+      }
+    }
+
+    &-right {
+      display: flex;
+      gap: 2px;
+      button {
+        background-color: rgba($black-color, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        height: 4rem !important;
+        width: 4rem !important;
+        font-size: 1.6rem !important;
+        padding: 0rem !important;
+      }
+    }
+  }
+
+  &__main {
+    overflow: auto;
+    height: calc(100vh - 34rem);
+    /* width */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #c6c6c6;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  }
+  &__date-header {
+    text-align: center;
+    margin: 20px 0;
+    padding: 5px 10px;
+    color: #333;
+    border-radius: 20px;
+    width: -moz-fit-content;
+    width: 100%;
+    align-self: center;
+    font-size: 1.5rem;
+    clear: both;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    padding: .6rem 1.8rem;
+   clear: both;
+
+    div {
+      img {
+        @include square(3.2rem);
+        vertical-align: middle;
+        border-radius: 50%;
+        margin-right: 1.6rem;
+        object-fit: cover;
+      }
+    }
+
+    div {
+      h6 {
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin: 0;
+      }
+      .text-light{
+        color: rgba($black-color, 0.55);
+      }
+
+      small {
+        color: rgba($black-color, 0.25);
+        font-size: 1.2rem;
+        font-weight: 400;
+        position: absolute;
+        right: 0.8rem;
+        top: 1.3rem;
+      }
+    }
+  }
+// &__body-right-container{
+//   display: flex;
+//   justify-content: flex-end !important; 
+// }
+  &__body-right {
+  
+    animation: show-chat-odd 0.15s 1 ease-in;
+    -moz-animation: show-chat-odd 0.15s 1 ease-in;
+    -webkit-animation: show-chat-odd 0.15s 1 ease-in;
+    display: flex;
+    align-items: center;
+    padding: .6rem 1.8rem;
+    clear: both;
+    float: right;
+    max-width: 70%;
+    div {
+      img {
+        @include square(3.2rem);
+        vertical-align: middle;
+        border-radius: 50%;
+        margin-right: 1.6rem;
+      }
+    }
+    div {
+      h6 {
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin: 0;
+      }
+
+
+      small {
+        color:rgba($white-color, 0.6);
+        font-size: 1.2rem;
+        font-weight: 400;
+        position: absolute;
+        right: 0.8rem;
+        top: 1.3rem;
+      }
+    }
+
+  
+    margin-right: 0px;
+    .chat-detail__box{
+      background:rgba($french_rose, 0.9);
+      color:rgba($white-color, 0.9);
+    }
+    
+}
+
+  &__box {
+    border-radius: 0.8rem 0.8rem 0.8rem 0px;
+    background: rgba($black-color, 0.05);
+    padding: 1.2rem 8.6rem 1.2rem 1.6rem;
+    position: relative;
+    &::before{
+      position: absolute;
+    top: 19px;
+    display: block;
+    width: 8px;
+    height: 6px;
+    content: " ";
+    transform: rotate(29deg) skew(-35deg);
+    background: rgba($black-color, 0.05);
+    }
+  }
+
+  &__footer {
+    background: rgba($black-color, 0.05);
+    margin: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10rem;
+    padding: 0.8rem 0.8rem 0.8rem 2rem;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 32%);
+
+    @media (max-width: 767px) {
+      width: calc(100% - 7%);
+    }
+  }
+
+  &__left {
+    @include placeholderWithFontSize(rgba($black-color, 0.5), 1.4rem, 500);
+    width: calc(100% - 5rem);
+    padding-right: 2rem;
+    display: inline-flex;
+
+    input {
+      background-color: transparent;
+      border: none;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__right {
+    width: 5rem;
+
+    a {
+      span {
+        @include square(4rem);
+        color: $white-color;
+        background-color: $french_rose;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        border-radius: 50%;
+      }
+    }
+  }
+ 
+  @media(max-width: 767px) {
+    background-color: $white-color;
+    position: fixed;
+    top: 0rem;
+    left: 0rem;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+// .zoom-icon {
+//   background-color: $zoom-icon-color;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: absolute;
+//   bottom: 2.3rem;
+//   right: 2.3rem;
+//   border-radius: 50%;
+//   height: 4rem;
+//   width: 4rem;
+// }
+
+.menu-text {
+  color: rgba($black-color, 0.5);
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+  display: inline-block;
+    vertical-align: sub;
+}
+.mat-mdc-menu-item .mat-icon {
+  margin-right: 6px;
+}
+.menu-text-red {
+  color: $electric_red !important;
+}
+
+.gray-border {
+  border-bottom: 1px solid rgba($black-color, 0.1);
+}
+.d-none{
+  display: none;
+}
+@media(max-width: 767px) {
+.visible-xs{
+  display: inline-block;
+  margin-right: 5px;
+}
+}

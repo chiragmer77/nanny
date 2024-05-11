@@ -1,0 +1,94 @@
+<div class="search">
+<div class = "container">
+  <h2>Rematch Au pairs</h2>
+  <p>Rematch happens when Au pair want to change host family in same foreign country</p>
+
+<div class="search-filter">
+  <form
+    [formGroup]="aupairFilterForm"
+    (submit)="onAupairFilterFormSubmit(aupairFilterForm)"
+  >
+    <div class="search-row">
+      <div>
+        <div class="search-width">
+          <div class="form-control form-control--filter">
+            <mat-form-field appearance="outline">
+              <mat-label>Rematch Country</mat-label>
+              <mat-select
+                placeholder="Select"
+                formControlName="presentCountry"
+              >
+                <mat-optgroup
+                  *ngFor="let countryGroup of countries"
+                  [label]="countryGroup.title"
+                >
+                  <mat-option
+                    *ngFor="let item of countryGroup.items"
+                    [value]="item.value"
+                  >
+                    {{ item.text }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+       
+
+        
+
+
+        <div class="display-inline">
+          <button
+            class="secondary-btn secondary-btn--height MR-1"
+            mat-flat-button
+            color="primary"
+            type="submit"
+          >
+            {{ "AUPAIR_SEARCH_PAGE.SEARCH_BTN" | translate }}
+          </button>
+
+          <button
+          *ngIf="isFilterApplied"
+          class="primary-btn"
+          (click)="onClickClearAll()"
+          mat-stroked-button
+        >
+          Show All
+        </button>
+        </div>
+      </div>
+      <div>
+        
+      </div>
+    </div>
+
+    <div class="MT-0">
+      <div class="row">
+        <div class="col-md-3 PL-0 MB-2" *ngFor="let aupair of aupairList">
+          <app-aupair-user-box
+            [user]="aupair"
+            (itemClick)="onClickUserItem($event)"
+          ></app-aupair-user-box>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="!isSearchLoading && aupairList.length === 0"
+      class="no-data-search"
+    >
+      <h5>{{ "AUPAIR_SEARCH_PAGE.ZERO_RESULT" | translate }}</h5>
+      <div class="no-data-search__height">
+        <div class="no-data-search__flex">
+          <img src="assets/images/no-data-search.png" />
+          <b>{{ "AUPAIR_SEARCH_PAGE.SORRY" | translate }}</b>
+          <p>{{ "AUPAIR_SEARCH_PAGE.CHANGE_CONDITION" | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+</div>

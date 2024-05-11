@@ -1,0 +1,161 @@
+@import "../../../../../../assets/scss/abstracts/abstracts";
+
+.article-details {
+  &__img {
+    width: 100%;
+    margin-bottom: 4.8rem;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  small {
+    color: rgba($black-color, 0.5);
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    margin-top: 1.5rem;
+  
+    li {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-left: 1.5rem;
+    }
+  }
+
+
+  table {
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Table headers */
+th {
+    background-color: #DD69B4; /* Change as needed */
+    color: white;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Table cells */
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+/* Zebra striping for rows */
+tr:nth-child(even) {
+    background-color: #FADADD;
+}
+
+
+table td strong, table td b,
+table th strong, table th b {
+    color: #FF69B4; 
+}
+
+.green-background{
+  color: darkgreen;
+  background-color: lightgreen; 
+}
+.red-text{
+  color: red; 
+  background-color: #FADADD;; 
+}
+  .attention-grabber {
+    background-color: #FFB6C1; /* Yellow background */
+    color: #333; /* Dark text color */
+    font-weight: bold;
+    font-size: 1.2em; /* Larger font size */
+    padding: 5px 5px; /* Add some padding for better visibility */
+    border-radius: 5px; /* Rounded corners */
+    display: inline-block; /* Ensures the background only covers the text */
+  }
+
+  .center-horizontal {
+    text-align: center;
+}
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  
+    justify-content: center; /* Centers cards in the container */
+    gap: 20px; /* Space between cards */
+    padding: 20px; /* Padding around the entire container */
+  }
+  mat-card {
+    width: 90%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff6f9; /* Consider a light neutral color */
+    flex: 0 1 calc(33.333% - 20px); /* Three cards per row with spacing */
+  
+  }
+  
+  /* Hover effect */
+  mat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Card header with a background image */
+  mat-card-header {
+    background-color:   #FF69B4; /*#DD69B4;  A deep purple for contrast */
+    color: white;
+    padding: 16px;
+  }
+  
+  /* Title and subtitle */
+  mat-card-subtitle {
+    color: #fff;
+    margin-top: 8px; 
+  }
+  mat-card-title {
+    font-weight: bold;
+    font-size: 20px; /* Adjust the font size as needed */
+    color: #fff; /* Change the color if needed */
+  }
+  
+  /* Card content */
+  mat-card-content {
+    padding: 16px;
+    color: #333; /* Dark text for readability */
+    font-size: 14px;
+  }
+  mat-card-content mat-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+    /* Adjust color and size as needed */
+    color: #FF91A4; /* Example color */
+    font-size: 20px; /* Example size */
+  }
+
+}

@@ -1,0 +1,262 @@
+@import "../../../../../../assets/scss/abstracts/abstracts";
+
+.article-details {
+  &__img {
+    width: 100%;
+    margin-bottom: 4.8rem;
+  }
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  h2 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  small {
+    color: rgba($black-color, 0.5);
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    margin-top: 1.5rem;
+  
+    li {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-left: 1.5rem;
+    }
+  }
+  .center-horizontal {
+    text-align: center;
+}
+
+  table {
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Table headers */
+th {
+    background-color: #DD69B4; /* Change as needed */
+    color: white;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Table cells */
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Zebra striping for rows */
+tr:nth-child(even) {
+    background-color: #FADADD;
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #FF91A4;
+}
+
+table td strong, table td b,
+table th strong, table th b {
+    color: #FF69B4; 
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: center; /* Centers cards in the container */
+  gap: 20px; /* Space between cards */
+  padding: 20px; /* Padding around the entire container */
+}
+mat-card {
+  width: 90%;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff6f9; /* Consider a light neutral color */
+  flex: 0 1 calc(33.333% - 20px); /* Three cards per row with spacing */
+
+}
+
+/* Hover effect */
+mat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card header with a background image */
+mat-card-header {
+  background-color:   #FF69B4; /*#DD69B4;  A deep purple for contrast */
+  color: white;
+  padding: 16px;
+}
+
+/* Title and subtitle */
+mat-card-subtitle {
+  color: #fff;
+  margin-top: 8px; 
+}
+mat-card-title {
+  font-weight: bold;
+  font-size: 20px; /* Adjust the font size as needed */
+  color: #fff; /* Change the color if needed */
+}
+
+/* Card content */
+mat-card-content {
+  padding: 16px;
+  color: #333; /* Dark text for readability */
+  font-size: 14px;
+}
+mat-card-content mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  /* Adjust color and size as needed */
+  color: #FF91A4; /* Example color */
+  font-size: 20px; /* Example size */
+}
+
+mat-card-actions mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #87CEEB; 
+  font-size: 20px; 
+}
+
+/* Card actions */
+mat-card-actions {
+  padding: 16px;
+  display: flex;
+  justify-content: flex-start;
+}
+mat-card-actions div {
+  margin-left: 8px; 
+  margin-right: 8px; 
+}
+
+/* Link styles */
+mat-card-actions a {
+  text-decoration: none;
+  color: #87CEEB; 
+  font-weight: bold;
+  
+}
+.info-section {
+  display: flex;
+  justify-content: space-between; /* Adjusts space between size and population */
+  align-items: center; /* Aligns items vertically */
+}
+
+/* Styles for individual info items */
+.info-item {
+  display: flex;
+  align-items: center; /* Aligns icon and text vertically */
+}
+/* Styles for the description list */
+.description-list {
+  list-style-type: disc; /* Standard bullet points */
+  padding-left: 20px; /* Indentation for bullet points */
+  margin-top: 10px; /* Space above the list */
+  margin-bottom: 10px; /* Space below the list */
+}
+
+.description-list li {
+  margin-bottom: 5px; /* Space between list items */
+}
+.mat-weblink {
+  color: #87CEEB; 
+  font-weight: bold;
+  text-decoration: none;
+
+} 
+
+.line-break {
+  line-break: strict;
+}
+.colored-bold {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FF69B4;
+}
+.text-details {
+  font-size: 16px;
+  padding-left: 5px;
+}
+/* Responsive table */
+@media screen and (max-width: 600px) {
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+.curved-image-container {
+  display: flex;
+  border-width: 0px;
+  border-color: #FF69B4;
+}
+
+.text-content {
+  flex: 1; /* Take up remaining space */
+}
+
+.curved-image {
+  width: 250px; /* Set the desired width for the image */
+  height: auto;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-width: 0px;
+  border-color: #FF69B4;
+}
+
+/* Larger screens */
+@media (min-width: 768px) {
+  .cards-container {
+    padding: 40px; /* More padding on larger screens */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .curved-image-container {
+    flex-direction: column;  // Change to column layout on smaller screens
+  }
+
+  .curved-image {
+    border-top-right-radius: 0;  // Remove border radius on smaller screens if needed
+    border-bottom-right-radius: 0;
+  }
+}
+}

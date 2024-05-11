@@ -1,0 +1,40 @@
+<div class="chat">
+  <div class="container">
+    <div class="chat__flex" *ngIf="!isContactListEmpty">
+      <div class="chat__list">
+        <app-conversation-list
+          (selectUser)="onSelectUser($event)"
+          (selectCountry)="onSelectCountry($event)"
+          (showMessageDetail)="onClickMessageUser($event)"
+          [userList]="userList"
+          [selectUserId] = "selectUserId"
+        ></app-conversation-list>
+      </div>
+
+      <div class="chat__detail"   [ngClass]="{'hide-on-mobile': !showMessageChat}">
+        <app-chat-detail
+          [userId]="selectUserId"
+          [userList]="userList"
+          [isCallEnabled]="isCallEnabled"
+          [type]="type"
+          (showConversationList)="onClickBackArrow()"
+          (BlockOrUnblockUserList) = "refreshUserList"
+          (CallNotification) = "onCallNotification($event)"
+        ></app-chat-detail>
+      </div>
+    </div>
+    <div
+    *ngIf="isContactListEmpty"
+    class="no-data-search"
+  >
+    <h5>{{ "AUPAIR_SEARCH_PAGE.ZERO_RESULT" | translate }}</h5>
+    <div class="no-data-search__height">
+      <div class="no-data-search__flex">
+        <img src="assets/images/no-data-search.png" />
+        <b>{{ "AUPAIR_SEARCH_PAGE.SORRY" | translate }}</b>
+        <p>No Chat History. Select a user from search result and then you can chat</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

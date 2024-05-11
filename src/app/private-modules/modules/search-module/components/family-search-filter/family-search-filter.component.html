@@ -1,0 +1,151 @@
+<div class="search-filter">
+  <form
+    [formGroup]="familyFilterForm"
+    (submit)="onFamilyFilterFormSubmit(familyFilterForm)"
+  >
+    <div class="search-row">
+      <div>
+        <div class="search-width">
+          <div class="form-control form-control form-control--filter">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_SEARCH_PAGE.PREFERRED_COUNTRY" | translate
+              }}</mat-label>
+              <mat-select
+                placeholder="Select"
+                multiple
+                formControlName="countries"
+              >
+                <mat-optgroup
+                  *ngFor="let countryGroup of continentAndCountries"
+                  [label]="countryGroup.title"
+                >
+                  <mat-option
+                    *ngFor="let item of countryGroup.items"
+                    [value]="item.value"
+                  >
+                    {{ item.text }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="search-width">
+          <div class="form-control form-control form-control--filter">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_SEARCH_PAGE.No._CHILDREN" | translate
+              }}</mat-label>
+              <mat-select
+                placeholder="Select"
+                formControlName="numberOfChildren"
+              >
+                <mat-option
+                  *ngFor="let child of numberOfChildrenUpTo"
+                  [value]="child.value"
+                >
+                  {{ child.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="search-width">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "COMMON.LOOKING_FROM" | translate
+              }}</mat-label>
+              <input
+                [placeholder]="'FAMILY_SEARCH_PAGE.LOOKING_FROM' | translate"
+                formControlName="availableFrom"
+                [min]="minDate"
+                matInput
+                [matDatepicker]="availableFromPicker"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="availableFromPicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #availableFromPicker
+                startView="multi-year"
+                (monthSelected)="setMonthAndYear($event, availableFromPicker)"
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="display-inline">
+          <button
+            class="secondary-btn secondary-btn--height MR-1"
+            type="submit"
+            mat-flat-button
+            color="primary"
+          >
+            {{ "FAMILY_SEARCH_PAGE.SEARCH_BTN" | translate }}
+          </button>
+
+          <button
+            (click)="onClickClearAll()"
+            *ngIf="isFilterApplied"
+            class="primary-btn primary-btn--height"
+            mat-stroked-button
+          >
+            {{ "FAMILY_SEARCH_PAGE.RESET_BTN" | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="fvrt-btn">
+          <button
+            type="button"
+            [ngClass]="{ active: isFavoriteFilterApplied }"
+            mat-stroked-button
+            class="strok-btn"
+            (click)="onClickFavoriteFamilyFilter()"
+          >
+            <mat-icon>favorite_outline</mat-icon
+            >{{ "FAMILY_SEARCH_PAGE.FAVORITE_BTN" | translate }}
+          </button>
+
+          <!-- <button mat-stroked-button class="strok-btn fav-btn">
+            <mat-icon>favorite_outline</mat-icon>Favorite
+          </button> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="MT-4">
+      <div class="row">
+        <div class="col-md-3 PL-0 MB-2" *ngFor="let family of familyList">
+          <app-family-user-box
+            [user]="family"
+            (removeFavoriteForParent)="onHandleRemoveFavorite($event)"
+            (itemClick)="onClickUserItem($event)"
+          ></app-family-user-box>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="!isSearchLoading && familyList.length === 0"
+      class="no-data-search"
+    >
+      <h5>{{ "FAMILY_SEARCH_PAGE.ZERO_RESULT" | translate }}</h5>
+      <div class="no-data-search__height">
+        <div class="no-data-search__flex">
+          <img src="assets/images/no-data-search.png" />
+          <b>{{ "FAMILY_SEARCH_PAGE.SORRY" | translate }}</b>
+          <p>{{ "FAMILY_SEARCH_PAGE.CHANGE_CONDITION" | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

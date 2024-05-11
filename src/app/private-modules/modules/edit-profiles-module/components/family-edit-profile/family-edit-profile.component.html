@@ -1,0 +1,431 @@
+<div class="edit-profile">
+  <div class="container">
+    <h3>{{ "FAMILY_EDIT_PROFILE.TITLE" | translate }}</h3>
+    <p>{{ "FAMILY_EDIT_PROFILE.SUB_TITLE" | translate }}</p>
+    <app-upload-images [profilePhotos]="profilePhotos" [otherPhotos]="otherPhotos"
+      [isLoading]="isLoading"></app-upload-images>
+
+    <form [formGroup]="familyProfileForm" (submit)="onFamilyEditProfileSubmit(familyProfileForm)">
+      <h5 class="MB-1-half">
+        {{ "FAMILY_EDIT_PROFILE.GENERAL_INFORMATION" | translate }}
+      </h5>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.FIRST_NAME" | translate
+                }}</mat-label>
+              <input [placeholder]="
+                  'FAMILY_EDIT_PROFILE.ENTER_FIRST_NAME' | translate
+                " matInput formControlName="firstName" autocomplete="off" />
+              <mat-error class="invalid"
+                *ngIf="(isSubmitted ||(f?.['firstName']?.dirty || f?.['firstName']?.touched)) && f?.['firstName']?.errors && f?.['firstName']?.errors?.['required']">
+                {{ "AUPAIR_REGISTRATION.VAL_FIRSTNAME" | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PLR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.LAST_NAME" | translate
+                }}</mat-label>
+              <input [placeholder]="
+                  'FAMILY_EDIT_PROFILE.ENTER_LAST_NAME' | translate
+                " matInput formControlName="lastName" autocomplete="off" />
+              <mat-error class="invalid"
+                *ngIf="(isSubmitted ||(f?.['lastName']?.dirty || f?.['lastName']?.touched)) && f?.['lastName']?.errors && f?.['lastName']?.errors?.['required']">
+                {{ "AUPAIR_REGISTRATION.VAL_LASTNAME" | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.EMAIL" | translate
+                }}</mat-label>
+              <input [placeholder]="'FAMILY_EDIT_PROFILE.ENTER_EMAIL' | translate" formControlName="email" matInput
+                autocomplete="off" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.RESIDING_CITY" | translate
+                }}</mat-label>
+              <input [placeholder]="'FAMILY_EDIT_PROFILE.ENTER_CITY' | translate" matInput formControlName="city"
+                autocomplete="off" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PLR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.RESIDING_COUNTRY" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="country">
+                <mat-optgroup *ngFor="let countryGroup of familyCountry" [label]="countryGroup.title">
+                  <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+              <mat-error class="invalid"
+                *ngIf="(isSubmitted ||(f?.['country']?.dirty || f?.['country']?.touched)) && f?.['country']?.errors && f?.['country']?.errors?.['required']">
+                {{ "AUPAIR_REGISTRATION.VAL_PRESENTCOUNTRY" | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.CITIZEN" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="citizenOf">
+                <mat-optgroup *ngFor="let countryGroup of familyCountry" [label]="countryGroup.title">
+                  <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.No._CHILDREN" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="noOfChildren">
+                <mat-option *ngFor="let child of numberOfChildren" [value]="child">
+                  {{ child }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PLR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.AGE_CHILDREN" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" multiple="" formControlName="listKidsAgeGroup">
+                <mat-option *ngFor="let age of hostAgeList" [value]="age.value">
+                  {{ age.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.FAMILY_TYPE" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="familyType">
+                <mat-option *ngFor="let familyType of familyTypes" [value]="familyType.value">
+                  {{ familyType.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.AUPAIR_MONEY" | translate
+                }}</mat-label>
+              <input [placeholder]="'FAMILY_EDIT_PROFILE.AUPAIR_MONEY' | translate" matInput
+                formControlName="pocketMoney" autocomplete="off" maxlength="5" type="number" />
+              <mat-select placeholder="Currency" panelClass="mat-select-fixed-width"
+                formControlName="pocketMoneyCurrency">
+                <mat-option *ngFor="let curr of currency" [value]="curr.value">
+                  {{ curr.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.SEARCH_STATUS" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="status">
+                <mat-option *ngFor="let status of statusList" [value]="status.value">
+                  {{ status.text }}
+                </mat-option>
+              </mat-select>
+              <mat-error class="invalid"
+                *ngIf="(isSubmitted ||(f?.['status']?.dirty || f?.['status']?.touched)) && f?.['status']?.errors && f?.['status']?.errors?.['required']">
+                {{ "AUPAIR_EDIT.VAL_STATUS" | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 PR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.MATCH_EMAIL" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="familyEmail">
+                <mat-option *ngFor="let familyEmail of familyEmails" [value]="familyEmail.value">
+                  {{ familyEmail.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="MB-1-half">
+        {{ "FAMILY_EDIT_PROFILE.ABOUT_FAMILY" | translate }}
+      </h5>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="form-control form-control--height form-control--textarea">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.FAMILY_DETAIL" | translate
+                }}</mat-label>
+              <textarea [placeholder]="
+                  'FAMILY_EDIT_PROFILE.ENTER_FAMILY_DETAIL' | translate
+                " formControlName="familyDescription" autocomplete="off" matInput></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PLR-0">
+          <div class="form-control form-control--height form-control--textarea">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.JOB_DESCRIPTION" | translate
+                }}</mat-label>
+              <textarea [placeholder]="
+                  'FAMILY_EDIT_PROFILE.ENTER_JOB_DESCRIPTION' | translate
+                " formControlName="jobDescription" autocomplete="off" matInput></textarea>
+              <mat-error class="invalid"
+                *ngIf="(isSubmitted ||(f?.['jobDescription']?.dirty || f?.['jobDescription']?.touched)) && f?.['jobDescription']?.errors && f?.['jobDescription']?.errors?.['required']">
+                {{ "AUPAIR_EDIT.VAL_DESCRIPTION" | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+      </div>
+
+      <h5 class="MB-1-half">
+        {{ "FAMILY_EDIT_PROFILE.FAMILY_VERIFICATION" | translate }}
+      </h5>
+
+      <div class="row">
+        <div class="col-md-4 PLR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.FACEBOOK_URL" | translate
+                }}</mat-label>
+              <input [placeholder]="
+                  'FAMILY_EDIT_PROFILE.ENTER_FACEBOOK_URL' | translate
+                " matInput formControlName="facebookURL" autocomplete="off" />
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+
+      <h5 class="MB-1-half">
+        {{ "FAMILY_EDIT_PROFILE.AUPAIR_REQUIREMENTS" | translate }}
+      </h5>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.PRESENT_COUNTRY" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" multiple formControlName="listAupairCountry">
+                <mat-optgroup *ngFor="let countryGroup of continentAndCountries" [label]="countryGroup.title">
+                  <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PLR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.AUPAIR_CITIZEN" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" multiple formControlName="listCitizenOf">
+                <mat-optgroup *ngFor="let countryGroup of aupaircountries" [label]="countryGroup.title">
+                  <mat-option *ngFor="let item of countryGroup.items" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4 PR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.LOOKING_FROM" | translate
+                }}</mat-label>
+              <input [placeholder]="'FAMILY_EDIT_PROFILE.LOOKING_FROM' | translate" formControlName="lookingFrom"
+                matInput [min]="minDate" [matDatepicker]="lookingFromPicker" />
+              <mat-datepicker-toggle matIconSuffix [for]="lookingFromPicker"></mat-datepicker-toggle>
+              <mat-datepicker #lookingFromPicker startView="multi-year"
+                (monthSelected)="setMonthAndYear($event, lookingFromPicker)" panelClass="example-month-picker">
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 PL-0">
+          <div class="row">
+            <div class="col-md-6 PLR-0">
+              <div class="form-control width-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "FAMILY_EDIT_PROFILE.AGE_FROM" | translate
+                    }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="aupairAgeFrom">
+                    <mat-option *ngFor="let age of fromAgeList" [value]="age">
+                      {{ age }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-6 PR-0">
+              <div class="form-control width-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "FAMILY_EDIT_PROFILE.AGE_TO" | translate
+                    }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="aupairAgeTo">
+                    <mat-option *ngFor="let age of toAgeList" [value]="age">
+                      {{ age }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 PLR-0">
+          <div class="form-control">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "FAMILY_EDIT_PROFILE.DURATION" | translate
+                }}</mat-label>
+              <mat-select placeholder="Select" formControlName="durationOfStay">
+                <mat-option *ngFor="let duration of durationOfStayList" [value]="duration.value">
+                  {{ duration.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="MT-2 MB-2-half">
+        {{ "FAMILY_EDIT_PROFILE.CONDITIONS" | translate }}
+      </h5>
+
+      <div class="row">
+        <div class="col-md-3 PL-0">
+          <mat-checkbox formControlName="canBike">{{
+            "FAMILY_EDIT_PROFILE.CONDITION_ONE" | translate
+            }}</mat-checkbox>
+        </div>
+
+        <div class="col-md-3 PLR-0">
+          <mat-checkbox formControlName="drivingLicence">{{
+            "FAMILY_EDIT_PROFILE.CONDITION_TWO" | translate
+            }}</mat-checkbox>
+        </div>
+
+        <div class="col-md-6 PR-0">
+          <mat-checkbox formControlName="nonSmoker">{{
+            "FAMILY_EDIT_PROFILE.CONDITION_THREE" | translate
+            }}</mat-checkbox>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 PL-0">
+          <mat-checkbox formControlName="childCareExperience">{{
+            "FAMILY_EDIT_PROFILE.CONDITION_FOUR" | translate
+            }}</mat-checkbox>
+        </div>
+
+        <div class="col-md-3 PLR-0">
+          <mat-checkbox formControlName="aupairExperience">{{
+            "FAMILY_EDIT_PROFILE.CONDITION_FIVE" | translate
+            }}</mat-checkbox>
+        </div>
+
+        <div class="col-md-6 PR-0">
+          <mat-checkbox formControlName="specialNeedPeople">{{
+            "FAMILY_EDIT_PROFILE.CONDITION_SIX" | translate
+            }}</mat-checkbox>
+        </div>
+      </div>
+
+      <div class="MT-4">
+        <button class="secondary-btn MR-1" mat-flat-button color="primary">
+          {{ "FAMILY_EDIT_PROFILE.UPDATE_BTN" | translate }}
+        </button>
+
+        <button (click)="onCancel()" type="button" class="primary-btn" mat-stroked-button>
+          {{ "FAMILY_EDIT_PROFILE.CANCEL_BTN" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

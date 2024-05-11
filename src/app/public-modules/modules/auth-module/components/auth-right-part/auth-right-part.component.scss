@@ -1,0 +1,37 @@
+img{
+    width: 100%;
+    object-fit: cover;
+}
+.bg_cover{
+    background: url(../../../../../../assets/images/coverimg.jpg);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    .bg-overlay{
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+    img {
+        width: 100%;
+    }
+
+    .auth-box-main {
+        margin: 3rem;
+
+        .auth-img-box {
+            padding: 1rem;
+
+            span {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+}

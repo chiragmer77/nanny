@@ -1,0 +1,81 @@
+<div class="edit-profile__flex">
+  <div class="edit-profile__left">
+    <div class="edit-profile-upload">
+      <h4 class="float-left d-inline-block MB-2">{{ "FAMILY_EDIT_PROFILE.PROFILE_PICTURE" | translate }} </h4>
+      <button (click)="onBrowseFile('selectFiles')" mat-fab extended class="btn-primary float-right">
+        <div> <mat-icon>upload</mat-icon> Upload</div>
+      </button>
+    </div>
+
+    <div *ngIf="!profilePhotos || profilePhotos.length === 0" class="empty-img-view">
+      <a (click)="onBrowseFile('selectFiles')" class="primary-link">
+        <img src="assets/images/profile-picture-default.png" alt="Profile picture">
+      </a>
+    </div>
+    <!-- <a (click)="onBrowseFile('selectFiles')" class="circle-sm float-right MR-1" matTooltip="Update Profile Picture">
+      <mat-icon>
+        update
+       </mat-icon>
+    </a> -->
+
+    <!-- <a (click)="onBrowseFile('selectFiles')" class="primary-link">{{
+      "FAMILY_EDIT_PROFILE.UPDATE_LINK" | translate
+    }}</a> -->
+    <div class="edit-profile__add-img">
+      <img *ngIf="profilePhotos?.length === 1" [src]="profilePhotos[0].photo" />
+      <div class="edit-profile__img-position">
+        <a *ngIf="profilePhotos?.length === 1" (click)="
+            onDeletePhoto(profilePhotos[0], uploadPhotoTypeEnum.PROFILE_PICTURE)
+          "><span class="material-icons-outlined material-icon-font-outlined">delete</span>
+          {{ "FAMILY_EDIT_PROFILE.DELETE_BTN" | translate }}
+        </a>
+      </div>
+    </div>
+
+    <input id="selectFiles" hidden type="file" [accept]="imageTypeAccept"
+      (change)="onFileUpload($event, uploadPhotoTypeEnum.PROFILE_PICTURE)" (click)="onFileElementClick($event)" />
+
+  </div>
+
+  <div class="edit-profile__right">
+    <div>
+      <div>
+        <div class="edit-profile-upload-multiple">
+          <h4 class="float-left d-inline-block MB-2"> {{ "FAMILY_EDIT_PROFILE.OTHER_PHOTOS" | translate }} </h4>
+
+          <button [disabled]="otherPhotos.length == 3" (click)="onBrowseFile('otherImages')" mat-fab extended
+            class="btn-primary float-right">
+            <div> <mat-icon>upload</mat-icon> Upload</div>
+          </button>
+        </div>
+        <!-- <a (click)="onBrowseFile('otherImages')" class="circle-sm float-right MR-1" matTooltip="Upload">
+          <mat-icon>
+            upload
+           </mat-icon>
+        </a>  -->
+        <input id="otherImages" hidden multiple type="file" [accept]="imageTypeAccept"
+          (change)="onFileUpload($event, uploadPhotoTypeEnum.OTHER)" (click)="onFileElementClick($event)" />
+
+
+      </div>
+      <div class="other-images-row MB-1">
+        <ng-container *ngFor="let otherPhoto of otherPhotos; let photoIndex = index">
+          <div class="edit-profile__add-img">
+            <img [src]="otherPhoto.photo" />
+            <div class="edit-profile__img-position">
+              <a (click)="onDeletePhoto(otherPhoto, uploadPhotoTypeEnum.OTHER)">
+                <span class="material-icons-outlined material-icon-font-outlined">delete</span>
+                {{ "FAMILY_EDIT_PROFILE.DELETE_BTN" | translate }}
+              </a>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngFor="let e of [].constructor(3 - otherPhotos.length);">
+          <a (click)="onBrowseFile('otherImages')" class="primary-link">
+            <img src="assets/images/aupair-default.png" width="210" height="126" alt="family picture">
+          </a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

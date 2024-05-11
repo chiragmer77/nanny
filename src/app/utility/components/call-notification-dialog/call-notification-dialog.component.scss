@@ -1,0 +1,40 @@
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .card {
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background-color: #ffe0f0; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .blinking {
+    color: #d81b60; 
+    font-size: 18px;
+    font-weight: bold;
+    animation: blink 2s linear infinite;
+  }
+  
+  .mat-dialog-actions {
+    display: flex;
+    padding-top: 20px;
+    justify-content: flex-end !important; 
+    gap: 10px;
+  }
+  
+  button {
+    padding: 10px 20px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: solid 2px #d81b60; 
+    color: #d81b60;
+  }
+
+  .button:hover {
+    background-color: grey; 
+  }

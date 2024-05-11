@@ -1,0 +1,118 @@
+<div class="auth">
+  <div class="container">
+    <div class="row MT-4-half">
+      <div class="col-md-7 PL-0">
+        <div class="row">
+          <div class="col-md-8 PL-0">
+            <div class="auth__body">
+              <form
+                [formGroup]="contactUsForm"
+                (submit)="onContactUsSubmit(contactUsForm)"
+              >
+                <h4>{{ "CONTACT_US_PAGE.TITLE" | translate }}</h4>
+
+                <p>{{ "CONTACT_US_PAGE.SUB_TITLE" | translate }}</p>
+
+                <div class="row">
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <div class="form-control">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "CONTACT_US_PAGE.REASON" | translate
+                        }}</mat-label>
+                        <mat-select
+                          [placeholder]="
+                            'CONTACT_US_PAGE.SELECT_REASON' | translate
+                          "
+                          formControlName="reasonType"
+                        >
+                          <mat-option
+                            [value]="reasonType"
+                            *ngFor="let reasonType of reasonTypeList"
+                          >
+                            {{ reasonType }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <div class="form-control">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "CONTACT_US_PAGE.FULL_NAME" | translate
+                        }}</mat-label>
+                        <input
+                          [placeholder]="
+                            'CONTACT_US_PAGE.ENTER_FULL_NAME' | translate
+                          "
+                          matInput
+                          formControlName="name"
+                          autocomplete="off"
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <div class="form-control">
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "CONTACT_US_PAGE.EMAIL" | translate
+                        }}</mat-label>
+                        <input
+                          [placeholder]="
+                            'CONTACT_US_PAGE.ENTER_EMAIL' | translate
+                          "
+                          matInput
+                          formControlName="email"
+                          autocomplete="off"
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                    <div
+                      class="form-control form-control--height form-control--textarea"
+                    >
+                      <mat-form-field appearance="outline">
+                        <mat-label>{{
+                          "CONTACT_US_PAGE.DESCRIPTION" | translate
+                        }}</mat-label>
+                        <textarea
+                          [placeholder]="
+                            'CONTACT_US_PAGE.ENTER_DESCRIPTION' | translate
+                          "
+                          formControlName="message"
+                          autocomplete="off"
+                          matInput
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 PL-0 PR-0 MT-1">
+                    <button
+                      type="submit"
+                      class="secondary-btn width-100 btn-height"
+                      mat-flat-button
+                      color="primary"
+                    >
+                      {{ "CONTACT_US_PAGE.SEND_BTN" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 text-right PR-0">
+        <img src="assets/images/contactus.png" />
+      </div>
+    </div>
+  </div>
+</div>

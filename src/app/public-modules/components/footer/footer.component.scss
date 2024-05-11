@@ -1,0 +1,86 @@
+@import "../../../../assets/scss/abstracts/abstracts";
+
+.home {
+  &__border {
+    border-bottom: 1px solid rgba($black-color, 0.1);
+    margin-top: 3rem;
+  }
+}
+
+.footer {
+  // @include pos(fixed, null, null, 0, 0);
+  background-color: rgba($black-color, 0.02);
+  margin-top: 2.8rem;
+  width: 100%;
+
+  .col-md-8.MT-1.text-right.PR-0{
+    @include respond("tab-port"){
+      text-align: center !important;
+    }
+  }
+
+  .home__sub-footer{
+    .col-md-8.text-right.PR-0{
+      @include respond("tab-port"){
+        text-align: center !important;
+      }
+    }
+  }
+}
+
+@media(max-width:767px) {
+  .home {
+
+    &__menu {
+      ul {
+        li {
+          margin: 0rem 1.6rem 1.3rem 0rem;
+        }
+      }
+    }
+
+    &__sub-footer {
+      .row {
+        flex-direction: column-reverse;
+
+        div {
+          text-align: center !important;
+        }
+      }
+    }
+
+    .text-right {
+      text-align: center !important;
+    }
+
+    .col-md-8 {
+      padding-left: 0rem;
+    }
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .home {
+
+    .col-md-4 {
+      text-align: center;
+    }
+
+    &__menu {
+      ul {
+        li {
+          margin-right: 3rem;
+        }
+      }
+    }
+
+    &__sub-footer {
+
+      .col-md-4,
+      .col-md-8 {
+        width: 50%;
+      }
+    }
+  }
+
+}

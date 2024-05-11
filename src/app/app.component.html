@@ -1,0 +1,9 @@
+<div *ngIf="isLoading" class="app-loader">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<app-header></app-header>
+<div class="router-outlet-body">
+    <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,22 @@
+@import "../../../../../../assets/scss/abstracts/abstracts";
+
+.search {
+  margin-top: 4.8rem;
+
+  h3 {
+    font-size: 3.2rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    color: rgba($black-color, 0.5);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 2.4rem;
+  }
+
+  @media(max-width:767px){
+    margin-top: 10rem;
+  }
+}

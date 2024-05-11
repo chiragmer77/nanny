@@ -1,0 +1,105 @@
+<div
+  class="view-profile"
+  [ngClass]="{ container: !aupairId && !profileNumber }"
+>
+  <div class="view-profile__header">
+    <div class="row">
+      <div class="col-md-6 PL-0">
+        <h3>Welcome {{ aupairDetail?.firstName }}</h3>
+        
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 PL-0 MB-2-half">
+      <img
+        *ngIf="!isLoading"
+        class="max-image-profile"
+      
+        [src]="
+          aupairDetail?.profilePhoto ||
+          aupairDetail?.profilePicture ||
+          'assets/images/profile-picture-default.png'
+        "
+      />
+    </div>
+  </div>
+  
+  <div class="view-profile__flex">
+   
+
+    <div class="view-profile__details">
+      <div>
+        <span class="material-icons-outlined material-icon-font-outlined">
+          calendar_today
+        </span>
+      </div>
+
+      <div>
+        <ul>
+          <li>
+            Available  from {{
+              aupairDetail?.availableFrom
+                | date : "MMM/YY"
+                | replaceNullWithText
+            }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+
+  </div>
+
+  <div class="row">
+    <p><b>This is a newly launched website. So will take few more weeks for more host families to sign up</b></p>
+  </div>
+
+  <div>
+    <div class="display-inline">
+      <button
+        class="secondary-btn secondary-btn--height MR-1"
+        mat-flat-button
+        color="primary"
+        type="submit"
+      >
+        View Profile
+      </button>
+  
+      <div class="display-inline">
+        <button
+          class="secondary-btn secondary-btn--height MR-1"
+          mat-flat-button
+          color="primary"
+          type="submit"
+        >
+          Edit Profile
+        </button>
+   </div>
+ <div>
+  <div class="display-inline">
+    <button
+      class="secondary-btn secondary-btn--height MR-1"
+      mat-flat-button
+      color="primary"
+      type="submit"
+    >
+      {{ "AUPAIR_SEARCH_PAGE.SEARCH_BTN" | translate }}
+    </button>
+
+    <div class="display-inline">
+      <button
+        class="secondary-btn secondary-btn--height MR-1"
+        mat-flat-button
+        color="primary"
+        type="submit"
+      >
+        Chat
+      </button>
+ </div>
+
+</div>
+
+

@@ -1,0 +1,508 @@
+<div class="auth">
+  <div class="container">
+    <div class="auth__body MT-4-half">
+      <form
+        [formGroup]="aupairRegistrationForm"
+        (submit)="onAupairEditProfileSubmit(aupairRegistrationForm)"
+      >
+        <h4 *ngIf="!isProfileUpdated">
+          {{ "AUPAIR_REGISTRATION.TITLE" | translate }}
+        </h4>
+        <h4 *ngIf="isProfileUpdated">
+          {{ "AUPAIR_REGISTRATION.UPLOAD" | translate }}
+        </h4>
+        <p *ngIf="!isProfileUpdated">
+          {{ "AUPAIR_REGISTRATION.SUB_TITLE" | translate }}
+        </p>
+
+        <ng-container *ngIf="!isProfileUpdated">
+          <h5 class="MB-1-half">
+            {{ "AUPAIR_REGISTRATION.GENERAL_INFORMATION" | translate }}
+          </h5>
+
+          <div class="row">
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.FIRST_NAME" | translate
+                  }}</mat-label>
+                  <input
+                    [placeholder]="
+                      'AUPAIR_REGISTRATION.ENTER_FIRST_NAME'
+                        | translate
+                    "
+                    matInput
+                    formControlName="firstName"
+                    autocomplete="off"
+                  />
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['firstName']?.dirty || f?.['firstName']?.touched)) && f?.['firstName']?.errors && f?.['firstName']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_FIRSTNAME" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.LAST_NAME" | translate
+                  }}</mat-label>
+                  <input
+                    [placeholder]="
+                      'AUPAIR_REGISTRATION.ENTER_LAST_NAME' | translate
+                    "
+                    matInput
+                    formControlName="lastName"
+                    autocomplete="off"
+                  />
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['lastName']?.dirty || f?.['lastName']?.touched)) && f?.['lastName']?.errors && f?.['lastName']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_LASTNAME" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.GENDER" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="gender">
+                    <mat-option
+                      *ngFor="let gender of genders"
+                      [value]="gender.value"
+                    >
+                      {{ gender.text }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['gender']?.dirty || f?.['gender']?.touched)) && f?.['gender']?.errors && f?.['gender']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_GENDER" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.AGE" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="age">
+                    <mat-option *ngFor="let age of fromAgeList" [value]="age">
+                      {{ age }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['age']?.dirty || f?.['age']?.touched)) && f?.['age']?.errors && f?.['age']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_AGE" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.PRESENT_CITY" | translate
+                  }}</mat-label>
+                  <input
+                    [placeholder]="
+                      'AUPAIR_REGISTRATION.ENTER_PRESENT_CITY'
+                        | translate
+                    "
+                    matInput
+                    formControlName="presentCity"
+                    autocomplete="off"
+                  />
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['presentCity']?.dirty || f?.['presentCity']?.touched)) && f?.['presentCity']?.errors && f?.['presentCity']?.errors?.['required']">{{ "AUPAIR_REGISTRATION.VAL_PRECENTCITY" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.PRESENT_COUNTRY" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="presentCountry">
+                    <mat-optgroup
+                      *ngFor="let countryGroup of aupairCountry"
+                      [label]="countryGroup.title">
+                      <mat-option
+                        *ngFor="let item of countryGroup.items"
+                        [value]="item.value">
+                        {{ item.text }}
+                      </mat-option>
+                    </mat-optgroup>
+                  </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['presentCountry']?.dirty || f?.['presentCountry']?.touched)) && f?.['presentCountry']?.errors && f?.['presentCountry']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_PRESENTCOUNTRY" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.CITIZEN" | translate
+                  }}</mat-label>
+                 <mat-select placeholder="Select" formControlName="citizenOf">
+                  <mat-optgroup
+                    *ngFor="let countryGroup of aupairCountry"
+                    [label]="countryGroup.title">
+                    <mat-option
+                      *ngFor="let item of countryGroup.items"
+                      [value]="item.value">
+                      {{ item.text }}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['citizenOf']?.dirty || f?.['citizenOf']?.touched)) && f?.['citizenOf']?.errors && f?.['citizenOf']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_CITIZENOF" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.LANGUAGES" | translate
+                  }}</mat-label>
+                  <mat-select
+                    placeholder="Select"
+                    multiple
+                    formControlName="listLanguageIds"
+                  >
+                    <mat-option
+                      *ngFor="let language of languages"
+                      [value]="language.value"
+                    >
+                      {{ language.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.RELIGION" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="religion">
+                    <mat-option
+                      *ngFor="let religion of religions"
+                      [value]="religion.value"
+                    >
+                      {{ religion.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.PROFESSION" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="profession">
+                    <mat-option
+                      *ngFor="let profession of professionList"
+                      [value]="profession.value"
+                    >
+                      {{ profession.text }} </mat-option
+                    >>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.EDUCATION" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="education">
+                    <mat-option
+                      *ngFor="let education of educationList"
+                      [value]="education.value"
+                    >
+                      {{ education.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.STATUS" | translate
+                  }}</mat-label>
+                  <mat-select placeholder="Select" formControlName="status">
+                    <mat-option
+                      *ngFor="let status of statusList"
+                      [value]="status.value"
+                    >
+                      {{ status.text }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['status']?.dirty || f?.['status']?.touched)) && f?.['status']?.errors && f?.['status']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_STATUS" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            
+            <div class="col-md-3 col-xs-6"  *ngIf="formControls['status'].value == statusEnum.REMATCH">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.REMATCH_MONTH" | translate
+                  }}</mat-label>
+                  <mat-select
+                    placeholder="Select"
+                    formControlName="rematchMonthsLeft"
+                  >
+                    <mat-option
+                      *ngFor="let month of rematchMonthList"
+                      [value]="month"
+                    >
+                      {{ month }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['rematchMonthsLeft']?.dirty || f?.['rematchMonthsLeft']?.touched)) && f?.['rematchMonthsLeft']?.errors && f?.['rematchMonthsLeft']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_REMATCHMONTHS" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+  
+            <div class="col-md-3 col-xs-6"  *ngIf="formControls['status'].value == statusEnum.REMATCH">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.REMATCH_COUNTRY" | translate
+                  }}</mat-label>
+                  <mat-select
+                    placeholder="Select"
+                    formControlName="rematchCountry"
+                  >
+                    <mat-option
+                      *ngFor="let country of countries"
+                      [value]="country.value"
+                    >
+                      {{ country.text }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['rematchCountry']?.dirty || f?.['rematchCountry']?.touched)) && f?.['rematchCountry']?.errors && f?.['rematchCountry']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.VAL_REMATCHCOUNTRY" | translate }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+    
+
+
+          <h5 class="MT-2 MB-2-half">
+            {{ "AUPAIR_REGISTRATION.CONDITIONS" | translate }}
+          </h5>
+
+          <div class="row">
+            <div class="col-md-3 PL-0">
+              <mat-checkbox formControlName="canBike">{{
+                "AUPAIR_REGISTRATION.CONDITION_ONE" | translate
+              }}</mat-checkbox>
+            </div>
+
+            <div class="col-md-3 PLR-0">
+              <mat-checkbox formControlName="drivingLicence">{{
+                "AUPAIR_REGISTRATION.CONDITION_TWO" | translate
+              }}</mat-checkbox>
+            </div>
+
+            <div class="col-md-6 PR-0">
+              <mat-checkbox formControlName="nonSmoker">{{
+                "AUPAIR_REGISTRATION.CONDITION_THREE" | translate
+              }}</mat-checkbox>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 PL-0">
+              <mat-checkbox formControlName="childCareExperience">{{
+                "AUPAIR_REGISTRATION.CONDITION_FOUR" | translate
+              }}</mat-checkbox>
+            </div>
+
+            <div class="col-md-3 PLR-0">
+              <mat-checkbox formControlName="aupairExperience">{{
+                "AUPAIR_REGISTRATION.CONDITION_FIVE" | translate
+              }}</mat-checkbox>
+            </div>
+
+            <div class="col-md-6 PR-0">
+              <mat-checkbox formControlName="specialNeedPeople">{{
+                "AUPAIR_REGISTRATION.CONDITION_SIX" | translate
+              }}</mat-checkbox>
+            </div>
+          </div>
+
+          <h5 class="MT-4 MB-1-half">
+            {{ "AUPAIR_REGISTRATION.PREFERENCE" | translate }}
+          </h5>
+
+          <div class="row">
+            <div class="col-md-4 PL-0">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.PREFERRED_COUNTRY" | translate
+                  }}</mat-label>
+                  <mat-select
+                    placeholder="Select"
+                    multiple
+                    formControlName="listFamilyCountries"
+                  >
+                    <mat-optgroup
+                      *ngFor="let countryGroup of continentAndCountries"
+                      [label]="countryGroup.title"
+                    >
+                      <mat-option
+                        *ngFor="let item of countryGroup.items"
+                        [value]="item.value"
+                      >
+                        {{ item.text }}
+                      </mat-option>
+                    </mat-optgroup>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-4 PLR-0">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.PREFERRED_AGE" | translate
+                  }}</mat-label>
+                  <mat-select
+                    placeholder="Select"
+                    multiple
+                    formControlName="listHostKidsAge"
+                  >
+                    <mat-option
+                      *ngFor="let age of hostAgeList"
+                      [value]="age.value"
+                    >
+                      {{ age.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-4 PR-0">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.AVAILABLE_FROM" | translate
+                  }}</mat-label>
+                  <input
+                    [placeholder]="
+                      'AUPAIR_REGISTRATION.AVAILABLE_FROM' | translate
+                    "
+                    formControlName="availableFrom"
+                    matInput
+                    [min]="minDate"
+                    [matDatepicker]="availableFromPicker"
+                  />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="availableFromPicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker
+                    #availableFromPicker
+                    startView="multi-year"
+                    (monthSelected)="
+                      setMonthAndYear($event, availableFromPicker)
+                    "
+                    panelClass="example-month-picker"
+                  >
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 PL-0">
+              <div class="form-control">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "AUPAIR_REGISTRATION.DURATION" | translate
+                  }}</mat-label>
+                  <mat-select
+                    placeholder="Select"
+                    formControlName="durationOfStay"
+                  >
+                    <mat-option
+                      *ngFor="let duration of durationOfStayList"
+                      [value]="duration.value"
+                    >
+                      {{ duration.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="MT-4 MB-1-half">
+            {{ "AUPAIR_REGISTRATION.TERMS" | translate }}
+          </h5>
+
+          <div class="row">
+            <div class="col-md-4 PL-0">
+              <mat-checkbox required formControlName="agreeToTerms">I agree to the Terms & Conditions & Privacy policy of this website</mat-checkbox>
+              <mat-error class= "invalid" *ngIf="(isSubmitted ||(f?.['agreeToTerms']?.dirty || f?.['agreeToTerms']?.touched)) && f?.['agreeToTerms']?.errors && f?.['agreeToTerms']?.errors?.['required']"> {{ "AUPAIR_REGISTRATION.AGREE_TO_TERMS" | translate }}</mat-error>
+
+            </div>  
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 PL-0">
+              <mat-checkbox formControlName="agreeToEmail" checked="true">I agree to receive Weekly email with suitable matches</mat-checkbox>
+            </div>
+          </div>
+
+          <div class="MT-3">
+            <button
+              type="submit"
+              class="secondary-btn"
+              mat-flat-button
+              color="primary"
+            >
+              <span class="material-icons-outlined material-icon-font-outlined">
+                save
+              </span>
+              {{ "AUPAIR_REGISTRATION.SAVE_BTN" | translate }}
+            </button>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isProfileUpdated">
+          <app-upload-images></app-upload-images>
+        </ng-container>
+      </form>
+    </div>
+  </div>
+</div>

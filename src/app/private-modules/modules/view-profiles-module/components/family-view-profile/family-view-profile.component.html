@@ -1,0 +1,367 @@
+<div class="view-profile PT-1" [ngClass]="{ container: !familyId && !profileNumber }">
+  <div class="view-profile__header">
+    <div class="row">
+      <div class="col-md-8 col-xs-7">
+        <h2 class="PB-0 MB-0">{{ familyDetail?.firstName }}</h2>
+      </div>
+      <div class="col-md-4 col-xs-5 text-right PB-1">
+        <a *ngIf="!familyId && !profileNumber" (click)="onEditProfile()" matTooltip="Edit Profile" class="btn__edit">
+          <span matTooltip="Edit Profile" class="material-icons-outlined material-icon-font-outlined">
+            edit
+          </span>
+        </a>
+        <a *ngIf="closeIcon != 'family'" (click)="onCloseDialog()" class="ML-2 btn__close" matTooltip="Close">
+          <span class="material-icons-outlined material-icon-font-outlined">
+            close
+          </span>
+        </a>
+
+
+
+      </div>
+
+      <div class="row col-md">
+        <div class="col-md-5 col-xs-12">
+          <span class="material-icons-outlined material-icon-font-outlined align-middle fs-24 grey-color">
+            location_on
+          </span>
+          <span class="align-middle grey-color">
+            {{ familyDetail?.city }} , {{ getCountryName(familyDetail?.country) }}
+          </span>
+        </div>
+        <div class="col-md-3 col-xs-12 next-preview postion-relative" *ngIf="familyId || profileNumber">
+          <div class="upper-side-section">
+            <button matTooltip="Previous" mat-fab extended color="primary" type="button" class="btn-primary"
+              (click)="onClickPrevious()">
+              <mat-icon>chevron_left</mat-icon>
+              Pre
+            </button>
+
+            <button matTooltip="Next" type="button" mat-fab extended color="primary" class="btn-primary ML-1"
+              (click)="onClickNext()" style="padding-right: 7px !important;">
+              Next
+              <span style="line-height: 21px;">
+                <mat-icon style="margin: 0;">chevron_right</mat-icon>
+              </span>
+            </button>
+          </div>
+          <!-- <span class="line"></span> -->
+        </div>
+        <div class="col-md-4 col-xs-12 text-right postion-relative">
+          <div class="upper-side-section-share">
+            <div class="float-right">
+              <div class="view-profile__header">
+                <div *ngIf="familyId || profileNumber">
+  
+                  <button (click)="onChatClick($event)" mat-fab extended class="btn-primary MR-1"
+                    matTooltip="Chat with family">
+                    <mat-icon>chat_bubble_outline</mat-icon>
+                    Free Chat
+                  </button>
+  
+                  <a (click)="onClickFavoriteFamily(familyDetail)" class="chat-bg" matTooltip="Add to Favorite">
+                    <span class="material-icons-outlined material-icon-font-outlined">
+                      {{ familyDetail?.favorite ? "favorite" : "favorite_outline" }}
+                    </span>
+                  </a>
+  
+                  <a class="chat-bg mr-2" matTooltip="Share your profile" [matMenuTriggerFor]="menu">
+                    <span class="material-symbols-outlined"> share </span>
+                  </a>
+  
+  
+                  <mat-menu #menu="matMenu">
+                    <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl" target="_blank" mat-menu-item
+                      class="gray-border">
+                      <svg class="svg-icon mr-2 align-middle" xmlns="http://www.w3.org/2000/svg" width="1.5em"
+                        height="2em" viewBox="0 0 32 32">
+                        <path fill="blue"
+                          d="M16 4C9.384 4 4 9.384 4 16s5.384 12 12 12s12-5.384 12-12S22.616 4 16 4m0 2c5.535 0 10 4.465 10 10a9.977 9.977 0 0 1-8.512 9.879v-6.963h2.848l.447-2.893h-3.295v-1.58c0-1.2.395-2.267 1.518-2.267h1.805V9.652c-.317-.043-.988-.136-2.256-.136c-2.648 0-4.2 1.398-4.2 4.584v1.923h-2.722v2.893h2.722v6.938A9.975 9.975 0 0 1 6 16c0-5.535 4.465-10 10-10" />
+                      </svg>
+                      <span class="menu-text menu-text-red "> Facebook</span>
+                    </a>
+                    <a [href]="'https://wa.me/?text=' + encodedUrl " target="_blank" mat-menu-item class="gray-border">
+  
+                      <span class="material-symbols-outlined mr-2 align-middle menu-text-green">sms</span>
+                      <span class="menu-text menu-text-red align-middle">Whatsapp</span>
+                    </a>
+                    <a (click)="onCopyUrl()" mat-menu-item class="gray-border">
+                      <span class="material-symbols-outlined mr-2 align-middle menu-text-red">content_copy</span>
+                      <span class="menu-text menu-text-red align-middle">Copy Profile</span>
+                    </a>
+  
+                    <!-- <button mat-menu-item class="gray-border">
+                    <mat-icon
+                      ><img
+                        src="../../../../../../assets/images/thumb_down_icon.png"
+                        alt=""
+                    /></mat-icon>
+                    <span class="menu-text">{{
+                      "CHAT_PAGE.NOT_INTERESTED" | translate
+                    }}</span>
+                  </button> -->
+  
+                  </mat-menu>
+  
+  
+  
+                  <!-- <a (click)="onCopyUrl()" class="chat-bg mr-2">
+                  <span class="material-symbols-outlined">content_copy</span>
+                </a> -->
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="tag-row MB-3">
+          <div>
+           <span class="red-tag">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4.00033 2H11.3337V10.6667L6.66699 15.3333L5.83366 14.5C5.75588 14.4222 5.69199 14.3167 5.64199 14.1833C5.59199 14.05 5.56699 13.9222 5.56699 13.8V13.5667L6.30033 10.6667H2.00033C1.64477 10.6667 1.33366 10.5333 1.06699 10.2667C0.800326 10 0.666992 9.68889 0.666992 9.33333V8C0.666992 7.92222 0.678103 7.83889 0.700326 7.75C0.722548 7.66111 0.74477 7.57778 0.766992 7.5L2.76699 2.8C2.86699 2.57778 3.03366 2.38889 3.26699 2.23333C3.50033 2.07778 3.74477 2 4.00033 2ZM10.0003 3.33333H4.00033L2.00033 8V9.33333H8.00033L7.10033 13L10.0003 10.1V3.33333ZM11.3337 10.6667V9.33333H13.3337V3.33333H11.3337V2H14.667V10.6667H11.3337Z"
+                  fill="#FC0909"
+                />
+              </svg>
+              {{ "FAMILY_VIEW_PROFILE.NOT_INTERESTED" | translate }}
+            </span> 
+          </div>
+        </div>
+      </div>-->
+
+    </div>
+
+    <div class="info-details">
+      <div class="row">
+        <div class="col-md-3 col-xs-6 col-lg-3">
+          <div class="border-chip">
+            <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+              calendar_month
+            </span>
+            <span class="align-middle">
+              {{ "FAMILY_VIEW_PROFILE.LOOKING_FROM" | translate }}
+              {{ familyDetail?.lookingFrom | date : "MMM-YYYY" }}
+
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-lg-3">
+          <div class="border-chip">
+            <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+              woman
+            </span>
+            <span class="align-middle">
+              {{ "FAMILY_VIEW_PROFILE.AUPAIR_AGE" | translate }}
+              {{ familyDetail?.aupairAgeFrom }}-{{ familyDetail?.aupairAgeTo }}
+
+            </span>
+          </div>
+        </div>
+
+
+        <div class="col-md-3 col-xs-6 col-lg-3">
+          <div class="border-chip">
+            <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+              toys
+            </span>
+            <span class="align-middle">
+              <!--{{ getDuration(familyDetail?.durationOfStay) }}-->
+              {{ familyDetail?.noOfChildren }} Children
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-xs-12 col-lg-3">
+          <div class="border-chip">
+            <span class="material-icons-outlined material-icon-font-outlined align-middle PR-1 chip-left">
+              emoji_emotions
+            </span>
+            <span class="align-middle">
+              {{ "Kids Age" | translate }} {{ getListKidsAgeGroup(familyDetail?.listKidsAgeGroup) }}
+            </span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="img-border-area">
+      <div class="row">
+        <div class="col-md-3 col-xs-6 img-fit">
+          <img class="img-fluid" *ngIf="!isLoading" (click)="onClickImage(0)" [src]="
+          familyDetail?.profilePhoto ||
+          familyDetail?.profilePicture ||
+          'assets/images/profile-picture-default.png'
+        " />
+        </div>
+        <ng-container *ngIf="!isLoading">
+          <div class="col-md-3 col-xs-6 PL-0 img-fit" *ngFor="let img of familyDetail?.otherPhotos; let i = index"
+            (click)="onClickImage(i + 1)">
+            <img class="img-fluid" [src]="img" />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="info-details MT-2">
+      <div class="row">
+        <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+          <h4 class="grey-color MB-0">Pocket Money </h4>
+          <p> {{ familyDetail?.pocketMoney ?? 'Not specified' }}</p>
+
+        </div>
+        <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+          <h4 class="grey-color MB-0">{{ "FAMILY_VIEW_PROFILE.DURATION" | translate }}</h4>
+          <p> {{ getDuration(familyDetail?.durationOfStay) }}</p>
+
+        </div>
+        <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+          <h4 class="grey-color MB-0"> Family Type</h4>
+          <p> {{ getFamilyType(familyDetail?.familyType) }} {{ "FAMILY_VIEW_PROFILE.FAMILY" | translate }} </p>
+
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-lg-3  MB-2">
+          <h4 class="grey-color MB-0">Status </h4>
+          <p> {{ getStatus(familyDetail?.status) }} </p>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- <div class="view-profile__flex">
+    <div class="view-profile__details">
+      <div>
+        <span class="material-icons-outlined material-icon-font-outlined">
+          elderly_woman
+        </span>
+      </div>
+      <div>
+        <ul>
+          <li>  {{ "FAMILY_VIEW_PROFILE.AUPAIR_AGE" | translate }} 
+            {{ familyDetail?.aupairAgeFrom }}-{{ familyDetail?.aupairAgeTo }}
+          </li>
+         </ul>
+      </div>
+    </div>
+  </div> -->
+
+    <div class="view-profile__content">
+      <h4>{{ "FAMILY_VIEW_PROFILE.FAMILY_DETAIL" | translate }}</h4>
+      <p [innerText]="familyDetail?.familyDescription"></p>
+    </div>
+
+    <div class="view-profile__content">
+      <h4>{{ "FAMILY_VIEW_PROFILE.JOB_DESCRIPTION" | translate }}</h4>
+      <p [innerText]="familyDetail?.jobDescription"></p>
+    </div>
+
+    <div class="view-profile__content">
+      <h4>{{ "FAMILY_VIEW_PROFILE.ABLE" | translate }}</h4>
+
+      <ul>
+        <li *ngIf="familyDetail?.canBike">
+          <p>
+            <span class="material-icons-outlined material-icon-font-outlined">
+              check
+            </span>
+            {{ "FAMILY_VIEW_PROFILE.CONDITION_ONE" | translate }}
+          </p>
+        </li>
+
+        <li *ngIf="familyDetail?.drivingLicence">
+          <p>
+            <span class="material-icons-outlined material-icon-font-outlined">
+              check
+            </span>
+            {{ "FAMILY_VIEW_PROFILE.CONDITION_TWO" | translate }}
+          </p>
+        </li>
+
+        <li *ngIf="familyDetail?.nonSmoker">
+          <p>
+            <span class="material-icons-outlined material-icon-font-outlined">
+              check
+            </span>
+            {{ "FAMILY_VIEW_PROFILE.CONDITION_THREE" | translate }}
+          </p>
+        </li>
+
+        <li *ngIf="familyDetail?.childCareExperience">
+          <p>
+            <span class="material-icons-outlined material-icon-font-outlined">
+              check
+            </span>
+            {{ "FAMILY_VIEW_PROFILE.CONDITION_FOUR" | translate }}
+          </p>
+        </li>
+
+        <li *ngIf="familyDetail?.aupairExperience">
+          <p>
+            <span class="material-icons-outlined material-icon-font-outlined">
+              check
+            </span>
+            {{ "FAMILY_VIEW_PROFILE.CONDITION_FIVE" | translate }}
+          </p>
+        </li>
+
+        <li *ngIf="familyDetail?.specialNeedPeople">
+          <p>
+            <span class="material-icons-outlined material-icon-font-outlined">
+              check
+            </span>
+            {{ "FAMILY_VIEW_PROFILE.CONDITION_SIX" | translate }}
+          </p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div class="chat-box">
+    <div class="chat-box__icon">
+      <div><mat-icon>sms</mat-icon></div>
+      <div><small>Start chatting with Miracle</small></div>
+    </div>
+    <div class="chat-box__footer">
+      <div>
+        <div class="chat-box__left">
+          <input
+            type="text"
+            matInput
+            placeholder="Upto 2 messages can be send until Au pair responds"
+          />
+        </div>
+      </div>
+      <div class="chat-box__right">
+        <a>
+          <span class="material-icons-outlined material-icon-font-outlined">
+            send
+          </span>
+        </a>
+      </div>
+    </div>
+  </div> -->
+  </div>
+  <app-image-view-slider *ngIf="familyDetail && pictureType" [previewPictures]="previewPictures"
+    (close)="onCloseSlider()"></app-image-view-slider>

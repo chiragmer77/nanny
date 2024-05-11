@@ -1,0 +1,25 @@
+<div *ngIf="verifyMessage else error" class="container">
+   
+    <mat-icon  class ="verify_icon" aria-hidden="false" aria-label="check icon" fontIcon="check_circle 
+    "></mat-icon>
+    <div class="verify_confirmation">
+        <div class="verify_confirmation_msg">
+            Your Email was verified .
+        </div>
+         You can continue with Register and LogIn.
+    </div>
+</div>
+<ng-template #error>
+    <div class="container">
+   
+        <mat-icon  class ="verify_icon" aria-hidden="false" aria-label="check icon" fontIcon="highlight_off 
+        "></mat-icon>
+        <div class="verify_confirmation">
+            <div class="verify_confirmation_msg">
+               ERROR
+            </div>
+             Your email address could not be verified.
+        </div>
+    </div>
+</ng-template>
+

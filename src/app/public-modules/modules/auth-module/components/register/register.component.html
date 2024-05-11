@@ -1,0 +1,133 @@
+<div class="auth">
+  <div class="container">
+    <div class="row MT-4-half">
+      <div class="col-md-7 PL-0">
+        <div class="row">
+          <div class="col-md-8 PL-0">
+            <div class="auth__body">
+              <div>
+                <form [formGroup]="registerForm" (submit)="onRegisterSubmit(registerForm)">
+                  <h4>{{ "REGISTER_PAGE.TITLE" | translate }}</h4>
+
+                  <p>{{ "REGISTER_PAGE.SUB_TITLE" | translate }}</p>
+
+                  <div class="row">
+                    <div class="col-md-12 col-xs-12 PL-0 PR-0 mb-1">
+                      <mat-radio-group formControlName="usertype">
+                        <mat-radio-button *ngFor="let type of userTypeList" [value]="type.type">{{ type.label
+                          }}</mat-radio-button>
+                        <mat-error class="invalid pad-user-type"
+                          *ngIf="(isSubmitted ||(f?.['usertype']?.dirty || f?.['confirmPassword']?.touched)) && f?.['usertype']?.errors && f?.['usertype']?.errors?.['required']">{{
+                          "REGISTER_PAGE.VAL_USERTYPE" | translate }}</mat-error>
+                      </mat-radio-group>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                      <div class="form-control">
+                        <mat-form-field appearance="outline">
+                          <mat-label>{{
+                            "REGISTER_PAGE.EMAIL" | translate
+                            }}</mat-label>
+                          <input [placeholder]="
+                              'REGISTER_PAGE.ENTER_EMAIL' | translate
+                            " matInput autocomplete="off" formControlName="email" />
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['email']?.dirty || f?.['email']?.touched)) && f?.['email']?.errors && f?.['email']?.errors?.['required']">{{
+                            "REGISTER_PAGE.VAL_EMAIL" | translate }}</mat-error>
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['email']?.dirty || f?.['email']?.touched)) && f?.['email']?.errors && !f?.['email']?.errors?.['required'] && f?.['email']?.errors?.['pattern']">{{
+                            "REGISTER_PAGE.VAL_EMAIL_NOTVALID" | translate }}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                      <div class="form-control">
+                        <mat-form-field appearance="outline">
+                          <mat-label>{{
+                            "REGISTER_PAGE.PASSWORD" | translate
+                            }}</mat-label>
+                          <input [placeholder]="
+                              'REGISTER_PAGE.ENTER_PASSWORD' | translate
+                            " matInput type="password" autocomplete="off" formControlName="password" />
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['password']?.dirty || f?.['password']?.touched)) && f?.['password']?.errors && f?.['password']?.errors?.['required']">{{
+                            "REGISTER_PAGE.VAL_PASSWORD" | translate }}</mat-error>
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['password']?.dirty || f?.['password']?.touched)) && f?.['password']?.errors && !f?.['password']?.errors?.['required'] && f?.['password']?.errors?.['pattern']">{{
+                            "REGISTER_PAGE.VAL_PASSWORD_MINLENGTH" | translate }}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12 PL-0 PR-0">
+                      <div class="form-control form-control--height">
+                        <mat-form-field appearance="outline">
+                          <mat-label>{{
+                            "REGISTER_PAGE.CONFIRM_PASSWORD" | translate
+                            }}</mat-label>
+                          <input [placeholder]="
+                              'REGISTER_PAGE.CONFIRM_ENTER_PASSWORD' | translate
+                            " matInput type="password" autocomplete="off" formControlName="confirmPassword" />
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['confirmPassword']?.dirty || f?.['confirmPassword']?.touched)) && f?.['confirmPassword']?.errors && f?.['confirmPassword']?.errors?.['required']">{{
+                            "REGISTER_PAGE.VAL_COMFIRMPASSWORD" | translate }}</mat-error>
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['confirmPassword']?.dirty || f?.['confirmPassword']?.touched)) && f?.['confirmPassword']?.errors && !f?.['confirmPassword']?.errors?.['required'] && f?.['confirmPassword']?.errors?.['pattern']">{{
+                            "REGISTER_PAGE.VAL_COMFIRMPASSWORD_MINLENGTH" | translate }}</mat-error>
+                          <mat-error class="invalid"
+                            *ngIf="(isSubmitted ||(f?.['confirmPassword']?.dirty || f?.['confirmPassword']?.touched)) && f?.['confirmPassword']?.errors && !f?.['confirmPassword']?.errors?.['required'] && !f?.['confirmPassword']?.errors?.['pattern'] && f?.['confirmPassword']?.errors?.['incorrect']">{{
+                            "REGISTER_PAGE.VAL_PASSWORDS_NOTMATCH" | translate }}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 PL-0 PR-0 MT-3">
+                      <button class="secondary-btn width-100 btn-height" mat-flat-button color="primary">
+                        {{ "REGISTER_PAGE.REGISTER_BTN" | translate }}
+                      </button>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12 PL-0 PR-0 MT-1-half">
+                      <small class="contact-chat">{{ "REGISTER_PAGE.ACCOUNT" | translate }}
+                        <a (click)="onLogin()">{{
+                          "REGISTER_PAGE.LOGIN_LINK" | translate
+                          }}</a></small>
+                    </div>
+                  </div>
+                </form>
+                <div class="col-md-12 col-xs-12 PLR-0 MT-1">
+                  <div class="row MT-2">
+                    <div class="col-md-12 col-xs-12 PL-0 PR-0 MT-1-half MB-2 text-center">
+                      <div class="login-divider">
+                        <span class="divider-line"></span>
+                        <span class="divider-text">or signup with</span>
+                        <span class="divider-line"></span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 PL-0 PR-0 MT-1-half">
+                      <button class="loginBtn loginBtn--facebook" (click)="signUpWithFB()">
+                        Sign up with Facebook
+                      </button>
+                    </div>
+                    <div class="col-md-6 col-xs-12 PL-0 PR-0 MT-1-half" >
+                      <!-- <asl-google-signin-button type='standard' text="signup_with" theme="filled_blue" width="225"
+                        size='medium'></asl-google-signin-button> -->
+                        <app-google-sso-login [clientId]="googleClientId" [data]="registerForm" [prefix]="'Sign up'" (onSigninSuccess)="onGoogleSigninSuccess($event)"></app-google-sso-login>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 PR-0">
+        <div class="vh-80">
+          <app-auth-right-part></app-auth-right-part>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

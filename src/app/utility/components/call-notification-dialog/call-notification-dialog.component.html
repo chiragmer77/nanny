@@ -1,0 +1,8 @@
+<div mat-dialog-content class="card">
+    <p class="blinking">{{ data.message }}</p>
+  </div>
+  <div mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button [mat-dialog-close]="false">{{ data.rejectButtonText }}</button>
+    <button mat-button color="accent" [mat-dialog-close]="true">{{ data.acceptButtonText }}</button>
+  </div>
+  <audio #callingSound id="callingSound" src="../../../../assets/incoming.wav" loop preload="auto"></audio>
