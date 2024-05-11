@@ -206,15 +206,14 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
     let params = { ...this.registerForm.value }
     console.log("params>>>>>>>>>>>>.",params)
     params = removeFieldsFromObj(params, ['confirmPassword']);
-    params.password = "12345678"
-    params.option1 = params.password
+    
     params.option2 = params.ipAddress
     params.option3 = params.country
     params.option4 = params.continent
     params.option5 = params.city
     params.option6 = params.region
 
-    const fieldsToEncrypt = ['option1','option2', 'option3', 'option4', 'option5', 'option6'];
+    const fieldsToEncrypt = ['option2', 'option3', 'option4', 'option5', 'option6'];
     params = this.sharedService.encryptFields(params, fieldsToEncrypt);
     console.log(params)
     this.registerUser(params).subscribe({
