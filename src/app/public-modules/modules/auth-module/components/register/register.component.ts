@@ -169,7 +169,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
           await FB.api('/me', { fields: 'email' }, async function (response: any) {
             console.log(response)
             email = response.email;
-            that.registerForm.value.LoginType = 'Facebook';
+            that.registerForm.value.logintype = 'Facebook';
             that.registerForm.value.email = email;
             // var profileUrl = `${userId+'/picture?type=large'}`
             // console.log(profileUrl)
