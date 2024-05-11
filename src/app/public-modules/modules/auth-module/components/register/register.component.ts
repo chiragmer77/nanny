@@ -117,7 +117,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
     }
     let params = { ...form.value };
     params = removeFieldsFromObj(params, ['confirmPassword']);
-    params.LoginType = "Email"
+    params.logintype = "Email"
     params.option1 = params.password
     params.option2 = params.ipAddress
     params.option3 = params.country
@@ -194,7 +194,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
   onGoogleSigninSuccess(google: any) {
     console.log("Sign in with Google button clicked...", google)
     let profile = google.getBasicProfile();
-    this.registerForm.value.LoginType = 'Google';
+    this.registerForm.value.logintype = 'Google';
     this.registerForm.value.email = profile.getEmail();
     this.registerForm.value.profilepictureurl = profile.getImageUrl();
 
