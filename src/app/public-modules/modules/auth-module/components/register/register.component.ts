@@ -165,13 +165,14 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
       this.accountService.login()
         .subscribe(async (res) => {
           // var userId = res.userID;
-          // console.log("res", res);
+          console.log("res", res);
+          // this.registerForm.value.token = res;
           await FB.api('/me', { fields: 'email' }, async function (response: any) {
             console.log(response)
             email = response.email;
             that.registerForm.value.logintype = 'Facebook';
             that.registerForm.value.email = email;
-            that.registerForm.value.password = '12345678';
+            // that.registerForm.value.password = '12345678';
             // var profileUrl = `${userId+'/picture?type=large'}`
             // console.log(profileUrl)
             // await FB.api(profileUrl, function (profile: any) {
@@ -198,6 +199,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
     this.registerForm.value.logintype = 'Google';
     this.registerForm.value.email = profile.getEmail();
     this.registerForm.value.profilepictureurl = profile.getImageUrl();
+    this.registerForm.value.token = google.getAuthResponse().id_token;
 
     this.socialSignup()
   }
@@ -205,7 +207,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
   socialSignup() {
     let params = { ...this.registerForm.value }
     console.log("params>>>>>>>>>>>>.",params)
-    params = removeFieldsFromObj(params, ['confirmPassword']);
+    params = removeFieldsFromObj(params, ['confirmPassword', 'password']);
     
     params.option2 = params.ipAddress
     params.option3 = params.country
