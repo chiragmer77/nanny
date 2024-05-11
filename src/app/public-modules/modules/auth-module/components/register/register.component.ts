@@ -221,8 +221,8 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
     this.registerUser(params).subscribe({
       next: (res) => {
         console.log(res)
-        // this.userAuthService.handleRegisterResponse(res);
-        // this.ShowMessage();
+        this.userAuthService.handleRegisterResponse(res);
+        this.ShowMessage();
       },
       error: (e: any) => console.error(e),
     });

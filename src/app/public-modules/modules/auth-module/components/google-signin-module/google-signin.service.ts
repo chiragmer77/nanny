@@ -25,10 +25,10 @@ export class GoogleAuthService {
         //Getting profile object
         let profile = googleUser.getBasicProfile();
         //Setting data to localstorage.
-        localStorage.setItem('token', googleUser.getAuthResponse().id_token);
-        localStorage.setItem('image', profile.getImageUrl());
-        localStorage.setItem('name', profile.getName());
-        localStorage.setItem('email', profile.getEmail());
+        // localStorage.setItem('token', googleUser.getAuthResponse().id_token);
+        // localStorage.setItem('image', profile.getImageUrl());
+        // localStorage.setItem('name', profile.getName());
+        // localStorage.setItem('email', profile.getEmail());
         // Alternatively you can create an object and return it like that - result = {
         // token: googleUser.getAuthResponse().id_token, name: profile.getName(), image:
         // profile.getImageUrl(), email: profile.getEmail(), };
