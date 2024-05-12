@@ -84,8 +84,9 @@
                   <!-- <asl-google-signin-button type="standard" theme='outline' size='medium'></asl-google-signin-button> -->
                 </div>
                 <div class="col-md-6 col-xs-12 PL-0 PR-0 MT-1-half">
+                  <app-google-signin [prefix]="'Sign in'" (loginWithGoogle)="googleSignin($event)"></app-google-signin>
                   <!-- <asl-google-signin-button type='standard' theme="filled_blue" width="225" size='medium'></asl-google-signin-button> -->
-                  <app-google-sso-login [clientId]="googleClientId" [data]="loginForm" [prefix]="'Sign in'" (onSigninSuccess)="onGoogleSigninSuccess($event)"></app-google-sso-login>
+                  <!-- <app-google-sso-login [clientId]="googleClientId" [data]="loginForm" [prefix]="'Sign in'" (onSigninSuccess)="onGoogleSigninSuccess($event)"></app-google-sso-login> -->
                 </div>
               </div>
             </div>

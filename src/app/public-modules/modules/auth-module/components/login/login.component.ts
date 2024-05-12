@@ -9,6 +9,8 @@ import { SharedService } from '@app/core';
 import { removeFieldsFromObj } from '@app/helpers';
 import { AccountService } from '../../services/account.service';
 import { environment } from '@env/environment';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { Subscription } from 'rxjs';
 
 declare const FB: any;
 @Component({
@@ -22,6 +24,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
   loginForm!: FormGroup;
   googleClientId = environment.googleClientId;
   @Output() onSigninSuccess = new EventEmitter();
+  authSubscription!: Subscription;
 
   constructor(public router: Router,
     private ip: IpServiceService,
@@ -29,8 +32,13 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
     private userAuthService: UserAuthService,
     private route: ActivatedRoute,
     private accountService: AccountService,
+    private authService: SocialAuthService,
     fb: FormBuilder) {
     super(fb)
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -39,6 +47,11 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
     // this.authService.authState.subscribe((user) => {
     //   console.log(user)
     // });
+
+    this.authSubscription = this.authService.authState.subscribe((user) => {
+      console.log('user', user);
+      this.onGoogleSigninSuccess(user);
+    });
   }
 
   initialize = () => {
@@ -130,31 +143,41 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
   async signInWithFB() {
     let email = ""
     let that = this;
-    await this.accountService.login()
-      .subscribe(async (res) => {
-        var url = '/me?fields=email';
-        await FB.api('/me', { fields: 'email' }, async function (response: any) {
-          email = response.email
-          console.log("email", email)
-          that.loginForm.value.LoginType = 'Facebook';
-          that.loginForm.value.email = email;
-//          that.loginForm.value.profilepictureurl = email;
-          await FB.api('/me',{ fields: 'picture{url}' }, function (profile: any) {
-            console.log(profile)
-            that.loginForm.value.profilepictureurl = profile.picture?.data?.url;
-            that.socialSignin()
+      this.accountService.login()
+        .subscribe(async (res) => {
+          // var userId = res.userID;
+          console.log("res", res);
+          this.loginForm.value.token = res.accessToken;
+          await FB.api('/me', { fields: 'email' }, async function (response: any) {
+            console.log(response)
+            email = response.email;
+            that.loginForm.value.logintype = 'Facebook';
+            that.loginForm.value.email = email;
+            // that.loginForm.value.password = '12345678';
+            // var profileUrl = `${userId+'/picture?type=large'}`
+            // console.log(profileUrl)
+            // await FB.api(profileUrl, function (profile: any) {
+            //   console.log(profile)
+            //   that.loginForm.value.profilepictureurl = profile.data?.url;
+            //   that.socialSignup()
+            // });
+            await FB.api('/me',{ fields: 'picture{url}' }, function (profile: any) {
+              console.log(profile)
+              that.loginForm.value.profilepictureurl = profile.picture?.data?.url;
+              that.socialSignin()
+            });
           });
         });
-      });
-
+    
   }
 
   onGoogleSigninSuccess(google: any) {
     console.log("Sign in with Google button clicked...", google)
-    let profile = google.getBasicProfile();
-    this.loginForm.value.LoginType = 'Google';
-    this.loginForm.value.email = profile.getEmail();
-    this.loginForm.value.profilepictureurl = profile.getImageUrl();
+    this.loginForm.value.logintype = 'Google';
+    this.loginForm.value.email = google.email;
+    this.loginForm.value.profilepictureurl = google.photoUrl;
+    this.loginForm.value.token = google.idToken;
+    this.loginForm.value.socialId = google.id;
 
     this.socialSignin()
   }
@@ -174,9 +197,13 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
     this.userAuthService.logIn(params).subscribe({
       next: (res) => {
         console.log(res)
-        // this.handleLoginResponse(res);
+        this.handleLoginResponse(res);
       },
       error: (e) => { }
     })
+  }
+
+  googleSignin(googleWrapper: any) {
+    googleWrapper.click();
   }
 }

@@ -111,9 +111,14 @@
                       </button>
                     </div>
                     <div class="col-md-6 col-xs-12 PL-0 PR-0 MT-1-half" >
-                      <!-- <asl-google-signin-button type='standard' text="signup_with" theme="filled_blue" width="225"
-                        size='medium'></asl-google-signin-button> -->
-                        <app-google-sso-login [clientId]="googleClientId" [data]="registerForm" [prefix]="'Sign up'" (onSigninSuccess)="onGoogleSigninSuccess($event)"></app-google-sso-login>
+                        <!-- <asl-google-signin-button type='standard' text="signup_with" theme="filled_blue" width="315"
+                          size='medium'>
+                        </asl-google-signin-button> -->
+                        
+                        <!-- <app-google-sso-login   [clientId]="googleClientId" [data]="registerForm" [prefix]="'Sign up'" (onSigninSuccess)="onGoogleSigninSuccess($event)"></app-google-sso-login> -->
+
+                        <app-google-signin [prefix]="'Sign up'" (loginWithGoogle)="googleSignin($event)"></app-google-signin>
+
                     </div>
                   </div>
                 </div>

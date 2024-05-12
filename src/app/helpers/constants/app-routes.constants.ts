@@ -36,11 +36,11 @@ export class RouteConstant {
   public static FOR_FAMILY = 'host-family';
   public static FOR_FAMILY_ROUTE = `${RouteConstant.ARTICLE}/${RouteConstant.FOR_FAMILY}`;
 
-  public static AUPAIR_IMPROVE_CHANCES = 'improve';
-
 
   public static readonly SEARCH = "search";
 
+  public static AUPAIR_IMPROVE_CHANCES = 'improve';
+  
   // complete registration
   public static readonly COMPLETE_REGISTRATION = "complete-registration";
   public static COMPLETE_AUPAIR_REGISTRATION = "aupair";

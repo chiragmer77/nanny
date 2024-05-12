@@ -12,11 +12,11 @@ import { CoreModule } from './core';
 import { ToastrModule } from 'ngx-toastr';
 import { appInitializer } from './public-modules/modules/auth-module/services/app.initializer';
 import { AccountService } from './public-modules/modules/auth-module/services/account.service';
-// import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-// import {
-//   GoogleLoginProvider,
-//   FacebookLoginProvider
-// } from '@abacritt/angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from '@abacritt/angularx-social-login';
 import { environment } from '@env/environment';
 
 @NgModule({
@@ -37,26 +37,26 @@ import { environment } from '@env/environment';
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
-    // {
-    //   provide: 'SocialAuthServiceConfig',
-    //   useValue: {
-    //     autoLogin: false,
-    //     providers: [
-    //       {
-    //         id: GoogleLoginProvider.PROVIDER_ID,
-    //         provider: new GoogleLoginProvider(
-    //           environment.googleClientId,
-    //           {
-    //             oneTapEnabled:false,
-    //           }
-    //         )
-    //       },
-    //     ],
-    //     onError: (err) => {
-    //       console.error(err);
-    //     }
-    //   } as SocialAuthServiceConfig,
-    // }
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '24219461878-fbcvi5sq346np5v2ml4bh3gd7r5rhtem.apps.googleusercontent.com',
+              {
+                scopes: 'openid profile email',
+              }
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

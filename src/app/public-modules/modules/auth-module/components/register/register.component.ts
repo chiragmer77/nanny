@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '@app/core';
 import { AccountService } from '../../services/account.service';
 import { environment } from '@env/environment';
+import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
+import { Subscription } from 'rxjs';
 // import { SocialAuthService } from "@abacritt/angularx-social-login";
 
 declare const FB: any;
@@ -25,6 +27,7 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
   userTypeList = userTypes;
   isSubmitted: boolean = false;
   googleClientId = environment.googleClientId;
+  authSubscription!: Subscription;
 
   //   constructor(private ip:IpServiceService){}
   //   title = 'DemoApp';
@@ -48,10 +51,14 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
     private sharedService: SharedService,
     private route: ActivatedRoute,
     private accountService: AccountService,
-    // private authService: SocialAuthService,
+    private authService: SocialAuthService,
     fb: FormBuilder
   ) {
     super(fb);
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -69,6 +76,16 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
 
     //   }
     // });
+
+    this.authSubscription = this.authService.authState.subscribe((user) => {
+      console.log('user', user);
+      this.onGoogleSigninSuccess(user);
+    });
+
+  }
+
+  loginWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   initialize = () => {
@@ -183,11 +200,6 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
             await FB.api('/me',{ fields: 'picture{url}' }, function (profile: any) {
               console.log(profile)
               that.registerForm.value.profilepictureurl = profile.picture?.data?.url;
-              // that.socialSignup()
-            });
-
-            await FB.api('/me',{ fields: 'id' }, function (id: any) {
-              console.log("id>>>>>>>>>",id)
               that.socialSignup()
             });
           });
@@ -200,12 +212,11 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
 
   onGoogleSigninSuccess(google: any) {
     console.log("Sign in with Google button clicked...", google)
-    let profile = google.getBasicProfile();
     this.registerForm.value.logintype = 'Google';
-    this.registerForm.value.email = profile.getEmail();
-    this.registerForm.value.profilepictureurl = profile.getImageUrl();
-    this.registerForm.value.token = google.getAuthResponse().id_token;
-
+    this.registerForm.value.email = google.email;
+    this.registerForm.value.profilepictureurl = google.photoUrl;
+    this.registerForm.value.token = google.idToken;
+    this.registerForm.value.socialId = google.id;
     this.socialSignup()
   }
 
@@ -231,6 +242,14 @@ export class RegisterComponent extends FormBaseComponent implements OnInit {
       },
       error: (e: any) => console.error(e),
     });
+  }
+
+  googleSignin(googleWrapper: any) {
+    if(this.registerForm.value.usertype){
+    googleWrapper.click();
+    }else{
+      this.toastr.info('Please Select User Type')
+    }
   }
 
 }

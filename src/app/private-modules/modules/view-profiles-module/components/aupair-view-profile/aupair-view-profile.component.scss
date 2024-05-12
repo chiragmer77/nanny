@@ -385,3 +385,17 @@ ul{
   top: -20px;
   right: 10px;
 }
+@media (min-width: 319px) and (max-width:767px) {
+  .upper-side-section {
+    position: absolute;
+    top: -40px;
+    display: flex;
+    left: 285px;
+  }
+
+  .upper-side-section-share {
+    position: absolute;
+    top: -40px;
+    right: 25px;
+  }
+} 
