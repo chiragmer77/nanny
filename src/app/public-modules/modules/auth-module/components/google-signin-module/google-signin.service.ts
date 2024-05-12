@@ -18,7 +18,7 @@ export class GoogleAuthService {
     gapi?.load('auth2', function () {
       auth2 = gapi
         .auth2
-        .init({ client_id: clientId, scope: 'profile email' });
+        .init({ client_id: clientId, plugin_name: 'profile email' });
       //Login button reference
       let element: any = document.getElementById('google-login-button');
       auth2.attachClickHandler(element, {}, function (googleUser: { getBasicProfile: () => any; getAuthResponse: () => { (): any; new(): any; id_token: string; }; }) {
