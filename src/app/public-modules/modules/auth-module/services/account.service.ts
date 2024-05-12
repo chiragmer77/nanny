@@ -38,7 +38,8 @@ export class AccountService {
 
     loginFacebook() {
         // login with facebook and return observable with fb access token on success
-        const fbLoginPromise = new Promise<any>(resolve => FB.login(resolve));
+        const scope = 'email';
+        const fbLoginPromise = new Promise<any>(resolve => FB.login(resolve,{scope}));
         return from(fbLoginPromise).pipe(
             concatMap(({ authResponse }) => authResponse ? of(authResponse) : EMPTY)
         );
